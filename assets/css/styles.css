@@ -184,3 +184,56 @@ main{padding-bottom:5rem}section{padding:4.25rem 0 0}.section-header{display:fle
 .card-header h2,.card-header h3,.card-header span{color:#fff!important}.card-header.yellow{background:linear-gradient(135deg,#ffcc00,#d8a900);color:#101827}.card-header.yellow h2,.card-header.yellow h3{color:#101827!important}.card-header.green{background:linear-gradient(135deg,#166534,#0b1f33)}
 .card-body{padding:1rem}.meta-table{display:grid;gap:.7rem}.meta-row{display:grid;grid-template-columns:130px 1fr;gap:1rem;background:#F8FAFC;border:1px solid var(--line);border-radius:14px;padding:.8rem}.meta-label{font-weight:950;color:#003399}.meta-value{font-weight:800;color:#101827}.content-text{white-space:pre-wrap;color:#334155}.quote-text{font-weight:800;color:#101827}.week-day-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 22px rgba(2,10,28,.07)}.week-day-header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:.8rem}.week-day-header h2,.week-day-header span{color:#fff!important}.week-day-body{padding:.8rem;display:grid;gap:.65rem}.week-section{background:#F8FAFC;border:1px solid var(--line);border-radius:14px;padding:.7rem}.week-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;font-weight:950;color:#003399;margin-bottom:.2rem}.week-content{color:#334155;font-weight:750}
 @media(max-width:1000px){#app.main-grid,#app.week-grid{grid-template-columns:1fr}.agenda-controls,.agenda-status{grid-template-columns:1fr}.meta-row{grid-template-columns:1fr}}
+
+/* RC4b: simplified course cards */
+.course-simple-card h3 a{
+  color:inherit;
+  text-decoration:none;
+}
+.course-simple-card h3 a:hover,
+.course-simple-card h3 a:focus{
+  color:#C8A24A;
+  text-decoration:underline;
+}
+.course-simple-card p{
+  margin-top:.75rem;
+}
+
+/* RC4c: simplified IED unit cards */
+.unit-card p:last-of-type{
+  margin-bottom:1rem;
+}
+
+/* RC4d: lesson navigation button visibility fix */
+.lesson-nav{
+  align-items:center;
+}
+.lesson-nav .btn,
+.lesson-nav a.btn,
+.lesson-nav .btn.secondary,
+.lesson-nav a.btn.secondary{
+  color:#0B1F3A !important;
+  text-shadow:none !important;
+  opacity:1 !important;
+  visibility:visible !important;
+}
+.lesson-nav .btn.secondary,
+.lesson-nav a.btn.secondary{
+  background:#FFFFFF !important;
+  border:1px solid rgba(11,31,58,.22) !important;
+  box-shadow:0 10px 24px rgba(2,10,28,.12) !important;
+}
+.lesson-nav .btn:not(.secondary),
+.lesson-nav a.btn:not(.secondary){
+  background:#C8A24A !important;
+  border:1px solid #C8A24A !important;
+  color:#0B1F3A !important;
+  box-shadow:0 10px 24px rgba(2,10,28,.14) !important;
+}
+.lesson-nav .btn:hover,
+.lesson-nav a.btn:hover,
+.lesson-nav .btn:focus,
+.lesson-nav a.btn:focus{
+  color:#0B1F3A !important;
+  text-decoration:none !important;
+}
