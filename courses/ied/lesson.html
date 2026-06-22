@@ -29,19 +29,39 @@
   </section>
 
   <section class="light-section lesson-content-section">
-    <div class="container lesson-layout">
-      <article class="card lesson-card" id="lesson-content">
-        <p>Loading lesson...</p>
+    <div class="container lesson-layout lesson-accordion-layout">
+      <article class="lesson-main">
+        <details class="mobile-checklist lesson-accordion">
+          <summary>
+            <span class="accordion-stripe"></span>
+            <span class="accordion-title-wrap"><span class="accordion-number">✓</span><span><strong>Lesson Checklist</strong><em>Use this to check your work before moving on.</em></span></span>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="accordion-body" id="lesson-checklist-mobile"></div>
+        </details>
+
+        <div id="lesson-content">
+          <p>Loading lesson...</p>
+        </div>
+
+        <section class="lesson-resources-panel">
+          <div class="section-header compact">
+            <div>
+              <h2>Lesson Resources</h2>
+              <p class="section-subtitle">Use these files and references when they support today’s work.</p>
+            </div>
+          </div>
+          <div class="lesson-resource-grid" id="lesson-resources"></div>
+        </section>
+
+        <div class="lesson-nav lesson-bottom-nav" id="lesson-nav-bottom"></div>
       </article>
-      <aside class="card sidebar lesson-sidebar">
+
+      <aside class="card sidebar lesson-sidebar desktop-checklist">
         <span class="tag">Lesson Checklist</span>
-        <h3>Before you leave</h3>
-        <ul class="unit-meta-list">
-          <li>Notebook entry is dated and labeled.</li>
-          <li>Deliverable is complete or progress is documented.</li>
-          <li>Portfolio evidence is saved if appropriate.</li>
-          <li>Next step is clear.</li>
-        </ul>
+        <h3>Check your work</h3>
+        <div id="lesson-checklist-desktop"></div>
+        <div class="sidebar-lesson-nav" id="lesson-nav-sidebar"></div>
       </aside>
     </div>
   </section>
