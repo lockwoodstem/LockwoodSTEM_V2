@@ -126,3 +126,61 @@ main{padding-bottom:5rem}section{padding:4.25rem 0 0}.section-header{display:fle
   .lesson-hero .hero-grid{grid-template-columns:1fr}
   .lesson-page .brand-logo{height:42px;max-width:170px}
 }
+
+
+/* RC4 additions */
+.nav-links a[aria-current="page"]{background:var(--gold);color:var(--navy)}
+.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1rem}
+.status-pill{display:inline-flex;align-items:center;border-radius:999px;padding:.35rem .7rem;font-weight:950;font-size:.78rem;background:#EAF3FF;color:#003399;border:1px solid rgba(0,51,153,.18)}
+.status-pill.soon{background:#FFF7D6;color:#5b3b00;border-color:rgba(200,162,74,.35)}
+.status-pill.ready{background:#DCFCE7;color:#14532D;border-color:rgba(22,163,74,.25)}
+.lesson-nav{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.4rem}
+.lesson-section{padding:1.2rem;border:1px solid var(--line);border-radius:18px;background:#fff;margin:1rem 0;box-shadow:0 10px 24px rgba(2,10,28,.06)}
+.lesson-section h2{margin-bottom:.4rem}
+.lesson-section .section-number{display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:950;margin-right:.5rem}
+.lesson-mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1rem 0}
+.resource-strip{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)}
+.unit-meta-list{display:grid;gap:.55rem;margin-top:1rem}
+.unit-meta-list li{background:#F8FAFC;border:1px solid var(--line);border-radius:12px;padding:.7rem .9rem;color:var(--text);font-weight:750}
+.agenda-app{background:linear-gradient(180deg,#F8FAFC,#EEF4FF);color:var(--text);min-height:100vh}
+.agenda-shell{width:min(1380px,94vw);margin:0 auto;padding:2rem 0 3rem}
+.agenda-panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow-soft);padding:1rem}
+.agenda-controls{display:grid;grid-template-columns:minmax(160px,1fr) 170px auto auto auto auto;gap:.75rem;align-items:end}
+.agenda-control{background:#fff;border:1px solid var(--line);border-radius:16px;padding:.65rem .8rem}
+.agenda-control label{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;font-weight:950;color:var(--muted);margin-bottom:.2rem}
+.agenda-control select,.agenda-control input{width:100%;border:0;background:transparent;color:var(--text);font-weight:900;font-size:.95rem}
+.agenda-status{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-top:1rem}
+.agenda-badge{background:#fff;border:1px solid var(--line);border-radius:999px;padding:.7rem 1rem;color:var(--text);font-weight:900;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.agenda-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(300px,.6fr);gap:1rem;margin-top:1rem}
+.agenda-stack{display:grid;gap:1rem}
+.agenda-card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 12px 28px rgba(2,10,28,.08);overflow:hidden;color:var(--text)}
+.agenda-card-header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:1rem 1.1rem;display:flex;justify-content:space-between;gap:1rem;align-items:center}
+.agenda-card-header h2,.agenda-card-header h3{color:#fff;margin:0}
+.agenda-card-header.yellow{background:linear-gradient(135deg,#ffcc00,#d8a900);color:#101827}
+.agenda-card-header.yellow h2,.agenda-card-header.yellow h3{color:#101827}
+.agenda-card-body{padding:1rem}
+.agenda-row{display:grid;grid-template-columns:130px 1fr;gap:1rem;background:#F8FAFC;border:1px solid var(--line);border-radius:14px;padding:.8rem;margin-bottom:.6rem}
+.agenda-label{font-weight:950;color:#003399}
+.agenda-value{font-weight:750;color:var(--text)}
+.agenda-list{margin:.2rem 0 0 1.1rem}
+.agenda-list li{margin:.35rem 0}
+.week-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.8rem;margin-top:1rem}
+.week-day-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 22px rgba(2,10,28,.07)}
+.week-day-header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:.8rem}
+.week-day-header h2{color:#fff;font-size:1rem}
+.week-day-body{padding:.8rem;display:grid;gap:.65rem}
+.week-section{background:#F8FAFC;border:1px solid var(--line);border-radius:14px;padding:.7rem}
+.week-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;font-weight:950;color:#003399;margin-bottom:.2rem}
+.empty{color:var(--muted);font-style:italic}
+.footer-links{display:flex;gap:1rem;flex-wrap:wrap;justify-content:flex-end}
+@media(max-width:1000px){.grid.four,.lesson-mini-grid,.agenda-controls,.agenda-status,.agenda-grid,.week-grid{grid-template-columns:1fr}.footer-links{justify-content:flex-start}}
+
+/* Agenda aliases for uploaded page JS output */
+#app.main-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(300px,.6fr);gap:1rem;margin-top:1rem}
+#app.week-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.8rem;margin-top:1rem}
+.left-stack,.side-grid{display:grid;gap:1rem}.left-stack{grid-template-rows:auto auto}.side-grid{align-content:start}
+.card-header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:1rem 1.1rem;display:flex;justify-content:space-between;gap:1rem;align-items:center}
+.card-header h2,.card-header h3,.card-header span{color:#fff!important}.card-header.yellow{background:linear-gradient(135deg,#ffcc00,#d8a900);color:#101827}.card-header.yellow h2,.card-header.yellow h3{color:#101827!important}.card-header.green{background:linear-gradient(135deg,#166534,#0b1f33)}
+.card-body{padding:1rem}.meta-table{display:grid;gap:.7rem}.meta-row{display:grid;grid-template-columns:130px 1fr;gap:1rem;background:#F8FAFC;border:1px solid var(--line);border-radius:14px;padding:.8rem}.meta-label{font-weight:950;color:#003399}.meta-value{font-weight:800;color:#101827}.content-text{white-space:pre-wrap;color:#334155}.quote-text{font-weight:800;color:#101827}.week-day-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 22px rgba(2,10,28,.07)}.week-day-header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:.8rem}.week-day-header h2,.week-day-header span{color:#fff!important}.week-day-body{padding:.8rem;display:grid;gap:.65rem}.week-section{background:#F8FAFC;border:1px solid var(--line);border-radius:14px;padding:.7rem}.week-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;font-weight:950;color:#003399;margin-bottom:.2rem}.week-content{color:#334155;font-weight:750}
+@media(max-width:1000px){#app.main-grid,#app.week-grid{grid-template-columns:1fr}.agenda-controls,.agenda-status{grid-template-columns:1fr}.meta-row{grid-template-columns:1fr}}
