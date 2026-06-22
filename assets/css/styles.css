@@ -493,3 +493,32 @@ span.btn.disabled{
   color:var(--navy)!important;
   border-color:var(--gold)!important;
 }
+
+/* RC4i: force all Resource Library download buttons to render with visible labels */
+.resource-card .card-actions .btn,
+.card.resource-card .card-actions .btn,
+.lesson-resource-card .btn {
+  min-width: 54px;
+  color: #FFFFFF !important;
+  background: var(--navy) !important;
+  border-color: var(--navy) !important;
+  opacity: 1 !important;
+  text-indent: 0 !important;
+  font-size: .86rem !important;
+}
+.resource-card .card-actions .btn:hover,
+.resource-card .card-actions .btn:focus,
+.lesson-resource-card .btn:hover,
+.lesson-resource-card .btn:focus {
+  background: #C8A24A !important;
+  border-color: #C8A24A !important;
+  color: var(--navy) !important;
+}
+.resource-card .card-actions .btn.disabled,
+.lesson-resource-card .btn.disabled,
+.resource-card .card-actions span.btn.disabled,
+.lesson-resource-card span.btn.disabled {
+  background: #E2E8F0 !important;
+  color: #334155 !important;
+  border-color: #CBD5E1 !important;
+}
