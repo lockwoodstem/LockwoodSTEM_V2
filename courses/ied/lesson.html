@@ -1,33 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LockwoodSTEM IED lesson page for the aerospace-focused Introduction to Engineering Design pathway.">
 <title>IED Lesson | LockwoodSTEM</title>
 <link rel="stylesheet" href="../../assets/css/styles.css">
 <script defer src="../../assets/js/main.js"></script>
 <script defer src="../../assets/js/ied-lessons.js"></script>
 </head>
-<body>
+<body class="lesson-page">
+<a class="skip-link" href="#main">Skip to main content</a>
+
 <header class="site-header">
-  <div class="container nav-inner">
+  <div class="container nav">
     <a class="brand" href="../../index.html" aria-label="LockwoodSTEM home">
-      <img src="../../assets/img/lockwoodstem-concept-a1-black-transparent.png" alt="LockwoodSTEM logo">
-      <span><strong>LockwoodSTEM</strong><small>Academy of Advanced Aerospace Engineering</small></span>
+      <img class="brand-logo" src="../../assets/img/lockwoodstem-concept-a1-black-transparent.png" alt="LockwoodSTEM logo">
+      <span class="brand-text"><span class="brand-title">LockwoodSTEM</span><span class="brand-sub">Academy of Advanced Aerospace Engineering</span></span>
     </a>
-    <nav class="main-nav" aria-label="Main navigation">
-      <a href="../../courses.html">Courses</a>
-      <a href="index.html">IED</a>
-      <a href="../../resources/index.html">Resources</a>
-      <a href="../../certifications/index.html">Certifications</a>
-      <a href="../../fablab/index.html">FabLab</a>
-      <a href="../../portfolio/index.html">Portfolio</a>
-    </nav>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">Menu</button>
+    <ul class="nav-links">
+      <li><a href="../../courses.html">Courses</a></li>
+      <li><a href="index.html" aria-current="page">IED</a></li>
+      <li><a href="../../resources/index.html">Resources</a></li>
+      <li><a href="../../certifications/index.html">Certifications</a></li>
+      <li><a href="../../fablab/index.html">FabLab</a></li>
+      <li><a href="../../portfolio/index.html">Portfolio</a></li>
+    </ul>
   </div>
 </header>
 
-<main id="lesson-root">
-  <section class="page-hero">
+<main id="main">
+  <section class="page-hero lesson-hero">
     <div class="container hero-grid">
       <div>
         <div class="eyebrow" id="lesson-eyebrow">IED Lesson</div>
@@ -38,22 +42,24 @@
           <a class="btn" href="../../resources/index.html">Open Resources</a>
         </div>
       </div>
-      <div class="card dark">
+
+      <aside class="card dark lesson-callout">
         <span class="tag">Student Deliverable</span>
         <h3 id="lesson-deliverable">Engineering notebook entry</h3>
         <p id="lesson-cert">Certification connection appears here.</p>
-      </div>
+      </aside>
     </div>
   </section>
 
-  <section class="light-section">
+  <section class="light-section lesson-content-section">
     <div class="container lesson-layout">
-      <article class="card">
+      <article class="card lesson-card">
+        <span class="tag">Daily Work</span>
         <h2>Learning Target</h2>
         <p id="lesson-target"></p>
 
         <h2>Agenda</h2>
-        <ul id="lesson-agenda"></ul>
+        <ul id="lesson-agenda" class="check-list"></ul>
 
         <h2>Notebook Entry</h2>
         <p id="lesson-notebook"></p>
@@ -62,20 +68,33 @@
         <p id="lesson-exit"></p>
       </article>
 
-      <aside class="card sidebar">
+      <aside class="card sidebar lesson-sidebar">
+        <span class="tag">Navigation</span>
         <h3>Course Navigation</h3>
         <p><a id="unit-link-2" href="index.html">Back to Unit Page</a></p>
         <p><a href="index.html">IED Course Hub</a></p>
         <p><a href="../../resources/index.html">Engineering Resource Library</a></p>
+        <hr>
+        <h3>Portfolio Reminder</h3>
+        <p>Save today’s notebook entry, sketches, CAD evidence, data, or reflection as part of your engineering portfolio.</p>
       </aside>
     </div>
   </section>
 </main>
 
-<footer class="site-footer">
+<footer class="footer">
   <div class="container footer-grid">
-    <div><strong>LockwoodSTEM.org</strong><p>Student-facing aerospace engineering curriculum.</p></div>
-    <div><p>GitHub Lite build uses a compact dynamic lesson page to avoid oversized course uploads.</p></div>
+    <div>
+      <img class="footer-logo" src="../../assets/img/lockwoodstem-concept-a1-black-transparent.png" alt="LockwoodSTEM logo">
+      <div style="margin-top:.5rem">Academy of Advanced Aerospace Engineering</div>
+    </div>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap">
+      <a href="../../courses.html">Courses</a>
+      <a href="../../resources/index.html">Resources</a>
+      <a href="../../certifications/index.html">Certifications</a>
+      <a href="../../fablab/index.html">FabLab</a>
+      <a href="../../portfolio/index.html">Portfolio</a>
+    </div>
   </div>
 </footer>
 </body>
