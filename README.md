@@ -20,3 +20,11 @@ This package is review-ready, not final-publication-complete. Reference guides a
 
 ## Deploy
 Upload the contents of this folder to a GitHub Pages repository. `.nojekyll` is included.
+
+
+## GitHub Lite Notes
+This version replaces the many individual IED lesson files with one dynamic page:
+`courses/ied/lesson.html?unit=1&lesson=1`
+
+The course content remains reviewable, but the `courses` folder is much smaller and easier to upload through GitHub's web uploader.
+Large image assets were compressed for upload-friendly previews. Full-size downloads are in the separate Resource Downloads Pack.
