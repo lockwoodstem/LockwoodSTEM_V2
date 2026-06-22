@@ -1,0 +1,6 @@
+<svg viewBox="0 0 100 100" role="img">
+          <polygon points="50,5 89,27.5 89,72.5 50,95 11,72.5 11,27.5" fill="none" stroke="#FFFFFF" stroke-width="6"/>
+          <path d="M31 68 L50 22 L69 68 Z" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+          <circle cx="50" cy="50" r="9" fill="#FFFFFF"/>
+          <path d="M25 35 H75 M25 65 H75 M35 25 V75 M65 25 V75" stroke="#FFFFFF" stroke-width="3" opacity=".62"/>
+        </svg>
