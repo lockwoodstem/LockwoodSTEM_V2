@@ -472,3 +472,24 @@ span.btn.disabled{
     grid-template-columns:1fr;
   }
 }
+
+/* RC4g: make editable resource download buttons readable on white cards */
+.resource-card .btn.secondary,
+.card.resource-card .btn.secondary,
+.card-actions .btn.secondary[href*="editable-docx"],
+.card-actions .btn.secondary[href*="editable-xlsx"]{
+  background:#FFFFFF!important;
+  color:var(--navy)!important;
+  border:1px solid rgba(11,31,58,.28)!important;
+  box-shadow:0 8px 18px rgba(2,10,28,.10)!important;
+}
+.resource-card .btn.secondary:hover,
+.resource-card .btn.secondary:focus,
+.card-actions .btn.secondary[href*="editable-docx"]:hover,
+.card-actions .btn.secondary[href*="editable-docx"]:focus,
+.card-actions .btn.secondary[href*="editable-xlsx"]:hover,
+.card-actions .btn.secondary[href*="editable-xlsx"]:focus{
+  background:#F8FAFC!important;
+  color:var(--navy)!important;
+  border-color:var(--gold)!important;
+}

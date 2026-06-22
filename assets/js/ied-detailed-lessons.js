@@ -117,7 +117,6 @@ function resourcesForLesson(lesson) {
 
   if (unit === "0") {
     return [
-      {title:"Engineering Notebook Page", description:"Template for dated notebook entries and design evidence.", href:null, available:false},
       {title:"Safety Certification Study Guide", description:"Review expectations before safety certification tasks.", href:null, available:false},
       ...base
     ];
@@ -148,7 +147,7 @@ function resourcesForLesson(lesson) {
   }
   if (unit === "4") {
     return [
-      {title:"Engineering Graph Paper", description:"Grid template for planning technical drawing layouts.", href:"../../downloads/templates/LS-TMP-001_Graph_Paper.pdf", available:true},
+      {title:"Engineering Graph Paper", description:"Grid template for planning technical drawing layouts.", href:"../../downloads/templates/LS-TMP-001_Engineering_Graph_Paper_Portrait.pdf", available:true},
       {title:"Dimensioning Guide", description:"Reference for dimensions, callouts, notes, and technical drawing standards.", href:null, available:false},
       {title:"Manufacturing Package Checklist", description:"Checklist for drawing package completeness and inspection information.", href:null, available:false},
       ...base
@@ -164,7 +163,6 @@ function resourcesForLesson(lesson) {
   if (unit === "6") {
     return [
       {title:"Prototype Planning Worksheet", description:"Plan materials, manufacturing process, testing, and risk before building.", href:null, available:false},
-      {title:"Test Data Spreadsheet", description:"Organize trials, measurements, observations, and redesign evidence.", href:null, available:false},
       ...base
     ];
   }
