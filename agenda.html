@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Daily Agenda | LockwoodSTEM</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="assets/css/styles.css">
+<script defer src="assets/js/main.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html" aria-label="LockwoodSTEM home">
+      <img class="brand-logo" src="assets/img/lockwoodstem-concept-a1-black-transparent.png" alt="LockwoodSTEM logo">
+      <span class="brand-text"><span class="brand-title">LockwoodSTEM</span><span class="brand-sub">Student Engineering Hub</span></span>
+    </a>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">Menu</button>
+    <ul class="nav-links">
+      <li><a href="courses.html">Courses</a></li><li><a href="agenda.html" aria-current="page">Daily Agenda</a></li><li><a href="resources/index.html">Resources</a></li><li><a href="certifications/index.html">Certifications</a></li><li><a href="fablab/index.html">FabLab</a></li><li><a href="about/index.html">About</a></li>
+    </ul>
+  </div>
+</header>
+<main id="main">
+
+<section class="page-hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Daily Agenda</div>
+      <h1>Daily Agenda</h1>
+      <p>Select your course, move between dates, and check what you need to complete today.</p>
+    </div>
+    <aside class="card dark">
+      <span class="tag">Courses</span>
+      <h3>IED • POE • Advanced Manufacturing</h3>
+      <p>The agenda uses the existing course selector, day/week view, and Google Sheets connection.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="agenda-app">
+  <div class="agenda-shell">
+    <div class="agenda-panel">
+      <div class="agenda-controls">
+        <div class="agenda-control">
+          <label for="courseSelect">Course</label>
+          <select id="courseSelect">
+            <option value="IED">IED</option>
+            <option value="POE">POE</option>
+            <option value="AM">Advanced Manufacturing</option>
+          </select>
+        </div>
+        <div class="agenda-control">
+          <label for="datePicker">Date</label>
+          <input id="datePicker" type="date">
+        </div>
+        <div class="view-toggle">
+          <button aria-pressed="true" class="view-btn active" id="dayViewBtn" type="button">Day</button>
+          <button aria-pressed="false" class="view-btn" id="weekViewBtn" type="button">Week</button>
+        </div>
+        <button id="prevBtn">◀ Previous</button>
+        <button class="primary" id="todayBtn">Today</button>
+        <button id="nextBtn">Next ▶</button>
+      </div>
+      <div class="agenda-status">
+        <div class="agenda-badge" id="dateBadge">Loading date...</div>
+        <div class="agenda-badge" id="courseBadge">Loading course...</div>
+        <div class="agenda-badge" id="lessonBadge">Loading lesson...</div>
+      </div>
+    </div>
+    <div class="loading" id="app" style="margin-top:1rem">Loading agenda...</div>
+  </div>
+</section>
+<script>
+const csvUrls = {
+  IED: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS4L3J5287xZ94Awc47kSrjAKOUIenbvYYlt15zdUAM4oL7Z_nVNegZ8M84JiKfrCr2x4FATCDS81Ng/pub?gid=1181780759&single=true&output=csv",
+  POE: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS4L3J5287xZ94Awc47kSrjAKOUIenbvYYlt15zdUAM4oL7Z_nVNegZ8M84JiKfrCr2x4FATCDS81Ng/pub?gid=94192821&single=true&output=csv",
+  AM: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS4L3J5287xZ94Awc47kSrjAKOUIenbvYYlt15zdUAM4oL7Z_nVNegZ8M84JiKfrCr2x4FATCDS81Ng/pub?gid=646728293&single=true&output=csv"
+};
+
+const quotesCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS4L3J5287xZ94Awc47kSrjAKOUIenbvYYlt15zdUAM4oL7Z_nVNegZ8M84JiKfrCr2x4FATCDS81Ng/pub?gid=1284674718&single=true&output=csv";
+
+let rows = [];
+let quoteRows = [];
+let currentCourse = "IED";
+let currentDate = "";
+let viewMode = "day";
+
+const els = {
+  app: document.getElementById("app"),
+  courseSelect: document.getElementById("courseSelect"),
+  datePicker: document.getElementById("datePicker"),
+  prevBtn: document.getElementById("prevBtn"),
+  todayBtn: document.getElementById("todayBtn"),
+  nextBtn: document.getElementById("nextBtn"),
+  dayViewBtn: document.getElementById("dayViewBtn"),
+  weekViewBtn: document.getElementById("weekViewBtn"),
+  dateBadge: document.getElementById("dateBadge"),
+  courseBadge: document.getElementById("courseBadge"),
+  lessonBadge: document.getElementById("lessonBadge")
+};
+
+function setTheme(course) {
+  document.body.classList.remove("theme-ied", "theme-poe", "theme-am");
+
+  if (course === "POE") document.body.classList.add("theme-poe");
+  else if (course === "AM") document.body.classList.add("theme-am");
+  else document.body.classList.add("theme-ied");
+}
+
+function courseName(course) {
+  if (course === "AM") return "Advanced Manufacturing";
+  return course;
+}
+
+function parseCSV(text) {
+  const result = [];
+  let row = [];
+  let field = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    const next = text[i + 1];
+
+    if (char === '"' && inQuotes && next === '"') {
+      field += '"';
+      i++;
+    } else if (char === '"') {
+      inQuotes = !inQuotes;
+    } else if (char === "," && !inQuotes) {
+      row.push(field);
+      field = "";
+    } else if ((char === "\n" || char === "\r") && !inQuotes) {
+      if (field || row.length) {
+        row.push(field);
+        result.push(row);
+        row = [];
+        field = "";
+      }
+      if (char === "\r" && next === "\n") i++;
+    } else {
+      field += char;
+    }
+  }
+
+  if (field || row.length) {
+    row.push(field);
+    result.push(row);
+  }
+
+  return result;
+}
+
+function normalizeDate(value) {
+  if (!value) return "";
+
+  const d = new Date(value);
+  if (!isNaN(d)) return d.toISOString().slice(0, 10);
+
+  const parts = value.trim().split(/[\/\-]/);
+  if (parts.length === 3) {
+    let [m, day, y] = parts;
+    if (y.length === 2) y = "20" + y;
+    return `${y.padStart(4, "0")}-${m.padStart(2, "0")}-${day.padStart(2, "0")}`;
+  }
+
+  return value.trim();
+}
+
+function displayDate(iso) {
+  const d = new Date(iso + "T12:00:00");
+  if (isNaN(d)) return iso || "No date selected";
+
+  return d.toLocaleDateString(undefined, {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+  });
+}
+
+
+function shortDisplayDate(iso) {
+  const d = new Date(iso + "T12:00:00");
+  if (isNaN(d)) return iso || "";
+
+  return d.toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric"
+  });
+}
+
+function addDaysISO(iso, days) {
+  const d = new Date(iso + "T12:00:00");
+  if (isNaN(d)) return iso;
+  d.setDate(d.getDate() + days);
+  return d.toISOString().slice(0, 10);
+}
+
+function startOfSchoolWeekISO(iso) {
+  const d = new Date(iso + "T12:00:00");
+  if (isNaN(d)) return iso;
+
+  // Monday is the start of the school week. Sunday rolls back six days.
+  const day = d.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  d.setDate(d.getDate() + diff);
+  return d.toISOString().slice(0, 10);
+}
+
+function schoolWeekDates(iso) {
+  const monday = startOfSchoolWeekISO(iso);
+  return [0, 1, 2, 3, 4].map(offset => addDaysISO(monday, offset));
+}
+
+function displayWeekRange(iso) {
+  const dates = schoolWeekDates(iso);
+  return `${shortDisplayDate(dates[0])}–${shortDisplayDate(dates[4])}`;
+}
+
+function dayName(iso) {
+  const d = new Date(iso + "T12:00:00");
+  if (isNaN(d)) return iso || "Day";
+  return d.toLocaleDateString(undefined, { weekday: "long" });
+}
+
+function setViewMode(mode) {
+  viewMode = mode === "week" ? "week" : "day";
+
+  if (els.dayViewBtn && els.weekViewBtn) {
+    els.dayViewBtn.classList.toggle("active", viewMode === "day");
+    els.weekViewBtn.classList.toggle("active", viewMode === "week");
+    els.dayViewBtn.setAttribute("aria-pressed", viewMode === "day" ? "true" : "false");
+    els.weekViewBtn.setAttribute("aria-pressed", viewMode === "week" ? "true" : "false");
+  }
+
+  render();
+}
+
+function todayISO() {
+  const now = new Date();
+  const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+  return local.toISOString().slice(0, 10);
+}
+
+function clean(value) {
+  return value && value.trim() ? value.trim() : "";
+}
+
+function escapeHTML(str) {
+  return String(str || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+function listify(text) {
+  const value = clean(text);
+  if (!value) return `<span class="empty">Nothing listed.</span>`;
+
+  const parts = value
+    .split(/\n|•|;|\u2022/)
+    .map(x => x.trim())
+    .filter(Boolean);
+
+  if (parts.length <= 1) return `<div class="content-text">${escapeHTML(value)}</div>`;
+
+  return `<ul class="agenda-list">${parts.map(x => `<li>${escapeHTML(x)}</li>`).join("")}</ul>`;
+}
+
+function safeText(value, fallback = "Nothing listed.") {
+  return clean(value) ? escapeHTML(value) : `<span class="empty">${fallback}</span>`;
+}
+
+function courseRows() {
+  return rows.sort((a, b) => a._date.localeCompare(b._date));
+}
+
+function findAgenda() {
+  return rows.find(r => r._date === currentDate) || null;
+}
+
+function findQuote() {
+  if (!quoteRows.length) return "";
+
+  const exact = quoteRows.find(r => r._date === currentDate);
+  if (exact) return exact.quote;
+
+  const before = quoteRows.filter(r => r._date <= currentDate);
+  if (before.length) return before[before.length - 1].quote;
+
+  return quoteRows[quoteRows.length - 1].quote;
+}
+
+function nearestAgenda() {
+  if (!rows.length) return null;
+  const today = todayISO();
+  return rows.find(r => r._date === today) || rows[rows.length - 1];
+}
+
+function shiftDate(direction) {
+  if (viewMode === "week") {
+    currentDate = addDaysISO(currentDate, direction * 7);
+    els.datePicker.value = currentDate;
+    render();
+    return;
+  }
+
+  const filtered = courseRows();
+  const dates = filtered.map(r => r._date);
+  const index = dates.indexOf(currentDate);
+
+  if (index === -1) {
+    currentDate = addDaysISO(currentDate, direction);
+  } else {
+    const nextIndex = Math.min(Math.max(index + direction, 0), dates.length - 1);
+    currentDate = dates[nextIndex];
+  }
+
+  els.datePicker.value = currentDate;
+  render();
+}
+
+
+function renderWeekView() {
+  const dates = schoolWeekDates(currentDate);
+  const today = todayISO();
+  const rowsByDate = new Map(rows.map(r => [r._date, r]));
+
+  els.dateBadge.textContent = `Week of ${displayWeekRange(currentDate)}`;
+  els.courseBadge.textContent = courseName(currentCourse);
+  els.lessonBadge.textContent = "Week view: agenda and homework";
+
+  els.app.className = "week-grid fade";
+  els.app.innerHTML = dates.map(date => {
+    const agenda = rowsByDate.get(date);
+    const isToday = date === today ? " today" : "";
+    const agendaContent = agenda ? listify(agenda.Agenda) : `<span class="week-empty">No agenda listed.</span>`;
+    const homeworkContent = agenda ? listify(agenda.Homework) : `<span class="week-empty">No homework listed.</span>`;
+
+    return `
+      <article class="week-day-card${isToday}">
+        <div class="week-day-header">
+          <h2>${escapeHTML(dayName(date))}</h2>
+          <span>${escapeHTML(shortDisplayDate(date))}</span>
+        </div>
+        <div class="week-day-body">
+          <section class="week-section">
+            <div class="week-label">Agenda</div>
+            <div class="week-content">${agendaContent}</div>
+          </section>
+          <section class="week-section">
+            <div class="week-label">Homework</div>
+            <div class="week-content">${homeworkContent}</div>
+          </section>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function render() {
+  if (viewMode === "week") {
+    renderWeekView();
+    return;
+  }
+
+  const agenda = findAgenda();
+  const quote = findQuote();
+
+  els.dateBadge.textContent = displayDate(currentDate);
+  els.courseBadge.textContent = courseName(currentCourse);
+  els.lessonBadge.textContent = agenda ? (agenda["Lesson Title"] || "Lesson") : "No agenda found";
+
+  if (!agenda) {
+    els.app.className = "card fade";
+    els.app.innerHTML = `
+      <div class="card-header yellow"><h2>No Agenda Found</h2></div>
+      <div class="card-body">
+        <p class="content-text">There is no agenda listed for ${escapeHTML(courseName(currentCourse))} on ${escapeHTML(displayDate(currentDate))}.</p>
+        <div style="margin-top:12px;" class="quote-text">${escapeHTML(quote || "No quote listed for this date.")}</div>
+      </div>
+    `;
+    return;
+  }
+
+  els.app.className = "main-grid fade";
+  els.app.innerHTML = `
+    <div class="left-stack">
+      <div class="card agenda-card">
+        <div class="card-header">
+          <h2>Class Agenda</h2>
+          <span>${escapeHTML(displayDate(agenda._date))}</span>
+        </div>
+        <div class="card-body">
+          <div class="meta-table">
+            <div class="meta-row">
+              <div class="meta-label">Course</div>
+              <div class="meta-value">${escapeHTML(courseName(currentCourse))}</div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-label">Lesson</div>
+              <div class="meta-value">${safeText(agenda["Lesson Title"], "No lesson listed.")}</div>
+            </div>
+            <div class="meta-row agenda-row">
+              <div class="meta-label">Agenda</div>
+              <div>${listify(agenda.Agenda)}</div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-label">Homework</div>
+              <div class="content-text">${safeText(agenda.Homework, "No homework listed.")}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header yellow"><h3>Important Announcements</h3></div>
+        <div class="card-body">${listify(agenda["Important Announcements"])}</div>
+      </div>
+    </div>
+
+    <div class="side-grid">
+      <div class="card">
+        <div class="card-header quote-header"><h3>Quote of the Day</h3></div>
+        <div class="card-body">
+          <div class="quote-text">${escapeHTML(quote || "No quote listed for this date.")}</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header green"><h3>Objectives</h3></div>
+        <div class="card-body">${listify(agenda.Objectives)}</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3>Standards</h3></div>
+        <div class="card-body">${listify(agenda.Standards)}</div>
+      </div>
+    </div>
+  `;
+}
+
+async function loadQuotes() {
+  try {
+    const res = await fetch(quotesCsvUrl);
+    const text = await res.text();
+    const parsed = parseCSV(text).filter(r => r.some(cell => cell.trim() !== ""));
+
+    quoteRows = parsed.slice(1).map(row => ({
+      _date: normalizeDate(row[0] || ""),
+      quote: row[1] || ""
+    })).filter(r => r._date && r.quote).sort((a, b) => a._date.localeCompare(b._date));
+  } catch (err) {
+    console.error("Quotes could not load", err);
+    quoteRows = [];
+  }
+}
+
+async function loadAgendaForCourse(course) {
+  try {
+    setTheme(course);
+    currentCourse = course;
+    els.app.className = "loading";
+    els.app.textContent = `Loading ${courseName(course)} agenda...`;
+
+    const res = await fetch(csvUrls[course]);
+    const text = await res.text();
+
+    const parsed = parseCSV(text).filter(r => r.some(cell => cell.trim() !== ""));
+    const headers = parsed[0].map(h => h.trim());
+
+    rows = parsed.slice(1).map(row => {
+      const obj = {};
+      headers.forEach((h, i) => obj[h] = row[i] || "");
+      obj._date = normalizeDate(obj.Date);
+      return obj;
+    }).filter(r => r._date).sort((a, b) => a._date.localeCompare(b._date));
+
+    currentDate = todayISO();
+    els.datePicker.value = currentDate;
+
+    render();
+  } catch (err) {
+    console.error(err);
+    els.app.className = "card";
+    els.app.innerHTML = `
+      <div class="card-header yellow"><h2>Agenda Could Not Load</h2></div>
+      <div class="card-body">
+        <p class="content-text">Check that the Google Sheet is published as a CSV and that the link is correct.</p>
+      </div>
+    `;
+  }
+}
+
+els.courseSelect.addEventListener("change", () => {
+  loadAgendaForCourse(els.courseSelect.value);
+});
+
+els.datePicker.addEventListener("change", () => {
+  currentDate = els.datePicker.value;
+  render();
+});
+
+if (els.dayViewBtn && els.weekViewBtn) {
+  els.dayViewBtn.addEventListener("click", () => setViewMode("day"));
+  els.weekViewBtn.addEventListener("click", () => setViewMode("week"));
+}
+
+els.prevBtn.addEventListener("click", () => shiftDate(-1));
+els.nextBtn.addEventListener("click", () => shiftDate(1));
+
+els.todayBtn.addEventListener("click", () => {
+  currentDate = todayISO();
+  els.datePicker.value = currentDate;
+  render();
+});
+
+(async function init() {
+  await loadQuotes();
+  await loadAgendaForCourse("IED");
+})();
+
+</script>
+
+</main>
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <img class="footer-logo" src="assets/img/lockwoodstem-concept-a1-black-transparent.png" alt="LockwoodSTEM logo">
+      <div class="footer-note">A student engineering hub for design, fabrication, and aerospace innovation.</div>
+    </div>
+    <div class="footer-links"><a href="courses.html">Courses</a> <a href="agenda.html">Daily Agenda</a> <a href="resources/index.html">Resources</a> <a href="certifications/index.html">Certifications</a> <a href="fablab/index.html">FabLab</a> <a href="about/index.html">About</a></div>
+  </div>
+</footer>
+</body>
+</html>

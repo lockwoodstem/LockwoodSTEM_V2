@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<title>Courses | LockwoodSTEM</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="LockwoodSTEM aerospace engineering academy resources">
-<title>Courses | LockwoodSTEM</title>
 <link rel="stylesheet" href="assets/css/styles.css">
 <script defer src="assets/js/main.js"></script>
 </head>
@@ -14,24 +13,61 @@
   <div class="container nav">
     <a class="brand" href="index.html" aria-label="LockwoodSTEM home">
       <img class="brand-logo" src="assets/img/lockwoodstem-concept-a1-black-transparent.png" alt="LockwoodSTEM logo">
-      <span class="brand-text"><span class="brand-title">LockwoodSTEM</span><span class="brand-sub">Academy of Advanced Aerospace Engineering</span></span>
+      <span class="brand-text"><span class="brand-title">LockwoodSTEM</span><span class="brand-sub">Student Engineering Hub</span></span>
     </a>
     <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">Menu</button>
-    <ul class="nav-links"><li><a href="courses.html" aria-current="page">Courses</a></li><li><a href="courses/ied/index.html" >IED</a></li><li><a href="resources/index.html" >Resources</a></li><li><a href="certifications/index.html" >Certifications</a></li><li><a href="fablab/index.html" >FabLab</a></li><li><a href="portfolio/index.html" >Portfolio</a></li></ul>
+    <ul class="nav-links">
+      <li><a href="courses.html" aria-current="page">Courses</a></li><li><a href="agenda.html">Daily Agenda</a></li><li><a href="resources/index.html">Resources</a></li><li><a href="certifications/index.html">Certifications</a></li><li><a href="fablab/index.html">FabLab</a></li><li><a href="about/index.html">About</a></li>
+    </ul>
   </div>
 </header>
 <main id="main">
-<section class="page-hero"><div class="container hero-grid"><div><div class="eyebrow">Courses</div><h1>Course Hubs</h1><p>Student-facing course entry points for the aerospace engineering academy pathway.</p></div></div></section>
-<section class="container"><div class="grid">
-<a class="course-card ied" href="courses/ied/index.html"><div class="accent-strip"></div><div class="course-body"><div class="icon-box"><svg viewBox="0 0 64 64" aria-hidden="true"><path fill="currentColor" d="M12 46h40v6H12zM18 12h28l6 10v20H12V22l6-10zm3 6-3 5v13h28V23l-3-5H21zm8 4h6v14h-6z"/></svg></div><div class="course-abbr">IED</div><div class="course-name">Introduction to Engineering Design</div><p class="course-desc">Aerospace-focused Units 0–7 with sketching, documentation, CAD, manufacturing, testing, and capstone.</p><div class="card-meta"><span>Open course</span><span>→</span></div></div></a>
-<a class="course-card poe" href="courses/poe/index.html"><div class="accent-strip"></div><div class="course-body"><div class="icon-box"><svg viewBox="0 0 64 64" aria-hidden="true"><path fill="currentColor" d="M32 6l24 14v24L32 58 8 44V20L32 6zm0 8L16 23v18l16 9 16-9V23l-16-9zm0 8a10 10 0 1 1 0 20 10 10 0 0 1 0-20z"/></svg></div><div class="course-abbr">POE</div><div class="course-name">Principles of Engineering</div><p class="course-desc">Planned aerospace applications for systems, mechanisms, energy, robotics, testing, and engineering analysis.</p><div class="card-meta"><span>Preview</span><span>→</span></div></div></a>
-<a class="course-card adm" href="courses/advanced-manufacturing/index.html"><div class="accent-strip"></div><div class="course-body"><div class="icon-box"><svg viewBox="0 0 64 64" aria-hidden="true"><path fill="currentColor" d="M10 44h44v8H10v-8zm4-18h10l4 8h8l4-8h10v14H14V26zm14-14h8v12h-8V12z"/></svg></div><div class="course-abbr">ADM</div><div class="course-name">Advanced Manufacturing</div><p class="course-desc">Planned FabLab manufacturing pathway connecting CAD, fabrication, quality control, and production workflows.</p><div class="card-meta"><span>Preview</span><span>→</span></div></div></a>
-</div></section>
+
+<section class="page-hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Courses</div>
+      <h1>Engineering academy courses</h1>
+      <p>Choose your course hub to find units, lessons, major projects, certifications, and course-specific portfolio requirements.</p>
+    </div>
+  </div>
+</section>
+<section class="container">
+  <div class="grid three">
+    <article class="card">
+      <span class="status-pill ready">Active</span>
+      <h3>Introduction to Engineering Design</h3>
+      <p>Students learn design process, technical communication, CAD modeling, documentation, assemblies, prototyping, and testing.</p>
+      <ul class="unit-meta-list">
+        <li>Units 0–7</li>
+        <li>Course-specific portfolio requirements</li>
+        <li>Certification checkpoints</li>
+      </ul>
+      <a class="btn dark small" href="courses/ied/index.html">Open Course</a>
+    </article>
+    <article class="card">
+      <span class="status-pill soon">Coming Soon</span>
+      <h3>Principles of Engineering</h3>
+      <p>This future hub will connect engineering science, systems, mechanisms, energy, materials, and analysis to aerospace applications.</p>
+      <a class="btn dark small" href="courses/poe/index.html">Preview</a>
+    </article>
+    <article class="card">
+      <span class="status-pill soon">Coming Soon</span>
+      <h3>Advanced Manufacturing</h3>
+      <p>This future hub will focus on fabrication workflows, production documentation, inspection, and advanced FabLab skills.</p>
+      <a class="btn dark small" href="courses/advanced-manufacturing/index.html">Preview</a>
+    </article>
+  </div>
+</section>
+
 </main>
 <footer class="footer">
   <div class="container footer-grid">
-    <div><img class="footer-logo" src="assets/img/lockwoodstem-concept-a1-black-transparent.png" alt="LockwoodSTEM logo"><div style="margin-top:.5rem">Academy of Advanced Aerospace Engineering</div></div>
-    <div style="display:flex;gap:1rem;flex-wrap:wrap"><a href="resources/index.html">Resources</a><a href="certifications/index.html">Certifications</a><a href="status/index.html">Build Status</a></div>
+    <div>
+      <img class="footer-logo" src="assets/img/lockwoodstem-concept-a1-black-transparent.png" alt="LockwoodSTEM logo">
+      <div class="footer-note">A student engineering hub for design, fabrication, and aerospace innovation.</div>
+    </div>
+    <div class="footer-links"><a href="courses.html">Courses</a> <a href="agenda.html">Daily Agenda</a> <a href="resources/index.html">Resources</a> <a href="certifications/index.html">Certifications</a> <a href="fablab/index.html">FabLab</a> <a href="about/index.html">About</a></div>
   </div>
 </footer>
 </body>
