@@ -1096,3 +1096,59 @@ main .btn.secondary,
   border-color: rgba(200, 162, 74, 0.45);
   background: rgba(200, 162, 74, 0.12);
 }
+
+
+/* RC8c: stacked microcredential badges in signed-in banner */
+.cert-account-inner {
+  grid-template-columns: minmax(180px, auto) minmax(320px, 1fr) auto;
+  align-items: start;
+}
+
+.micro-badge-strip {
+  flex-wrap: wrap;
+  overflow-x: visible;
+  scrollbar-width: none;
+  row-gap: 0.4rem;
+  max-width: 100%;
+  align-content: flex-start;
+}
+
+.micro-badge-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.micro-badge.compact {
+  padding: 0.24rem 0.44rem;
+  font-size: 0.74rem;
+}
+
+.micro-badge.compact .micro-badge-icon {
+  min-width: 1.2rem;
+  height: 1.2rem;
+  font-size: 0.66rem;
+}
+
+@media (max-width: 1100px) {
+  .cert-account-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .cert-account-actions {
+    justify-content: flex-start;
+  }
+}
+
+
+/* RC8d: Teacher-only dashboard access button */
+.cert-account-bar .cert-teacher-dashboard-btn {
+  background: #0b1f3a;
+  color: #ffffff !important;
+  border-color: #0b1f3a;
+}
+
+.cert-account-bar .cert-teacher-dashboard-btn:hover,
+.cert-account-bar .cert-teacher-dashboard-btn:focus {
+  color: #ffffff !important;
+  outline: 3px solid rgba(200, 162, 74, 0.42);
+  outline-offset: 2px;
+}
