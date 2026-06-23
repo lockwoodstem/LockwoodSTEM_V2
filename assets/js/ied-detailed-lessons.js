@@ -126,20 +126,23 @@ function resourcesForLesson(lesson) {
       {title:"Isometric Sketch Paper", description:"Use for 3D technical sketching practice.", href:"../../downloads/templates/LS-TMP-002_Isometric_Sketch_Paper.pdf", available:true},
       {title:"Orthographic & Isometric Sketch Sheet", description:"Use for top, front, right, and isometric view practice.", href:"../../downloads/templates/LS-TMP-003_Orthographic_Isometric_Sketch_Sheet.pdf", available:true},
       {title:"Line Conventions Guide", description:"Reference for object lines, hidden lines, centerlines, and drawing communication.", href:"../../downloads/references/LS-REF-003_Line_Conventions_Guide.pdf", available:true},
-      {title:"Sketching Practice Packet", description:"Additional practice for technical sketching and drawing interpretation.", href:null, available:false},
+      {title:"Dimensioning Guide", description:"Reference for placing dimensions so parts can be built and inspected.", href:"../../downloads/references/LS-REF-004_Dimensioning_Guide.pdf", available:true},
+      {title:"Orthographic Projection Guide", description:"Reference for aligned top, front, and right-side views.", href:"../../downloads/references/LS-REF-005_Orthographic_Projection_Guide.pdf", available:true},
+      {title:"Isometric Sketching Guide", description:"Reference for isometric axes, construction boxes, and isometric circles.", href:"../../downloads/references/LS-REF-006_Isometric_Sketching_Guide.pdf", available:true},
       ...base
     ];
   }
   if (unit === "2") {
     return [
-      {title:"BOM Template", description:"Template for documenting parts, quantities, materials, and notes.", href:null, available:false},
-      {title:"Assembly Documentation Checklist", description:"Checklist for exploded views, notes, fasteners, and assembly clarity.", href:null, available:false},
+      {title:"BOM Template", description:"Template for documenting parts, quantities, materials, and notes.", href:"../../downloads/editable-xlsx/LS-TMP-011_BOM_Template.xlsx", available:true},
+      {title:"Assembly Documentation Guide", description:"Reference for exploded views, callouts, BOMs, notes, and assembly clarity.", href:"../../downloads/references/LS-REF-008_Assembly_Documentation_Guide.pdf", available:true},
       {title:"Engineering Change Request Form", description:"Template for recording design changes and revision reasons.", href:null, available:false},
       ...base
     ];
   }
   if (unit === "3") {
     return [
+      {title:"Line Conventions Guide", description:"Reference for clean CAD drawing communication and technical sketch evidence.", href:"../../downloads/references/LS-REF-003_Line_Conventions_Guide.pdf", available:true},
       {title:"CAD Modeling Checklist", description:"Checklist for sketches, constraints, features, parameters, and exports.", href:null, available:false},
       {title:"Fusion CAD Level 1 Practice File", description:"Practice resource for part modeling and CAD certification readiness.", href:null, available:false},
       ...base
@@ -148,28 +151,30 @@ function resourcesForLesson(lesson) {
   if (unit === "4") {
     return [
       {title:"Engineering Graph Paper", description:"Grid template for planning technical drawing layouts.", href:"../../downloads/templates/LS-TMP-001_Engineering_Graph_Paper_Portrait.pdf", available:true},
-      {title:"Dimensioning Guide", description:"Reference for dimensions, callouts, notes, and technical drawing standards.", href:null, available:false},
-      {title:"Manufacturing Package Checklist", description:"Checklist for drawing package completeness and inspection information.", href:null, available:false},
+      {title:"Dimensioning Guide", description:"Reference for dimensions, callouts, notes, and technical drawing standards.", href:"../../downloads/references/LS-REF-004_Dimensioning_Guide.pdf", available:true},
+      {title:"Orthographic Projection Guide", description:"Reference for multiview alignment and top, front, and right-side views.", href:"../../downloads/references/LS-REF-005_Orthographic_Projection_Guide.pdf", available:true},
+      {title:"Section & Detail Views Guide", description:"Reference for section views, cutting planes, hatch lines, and detail views.", href:"../../downloads/references/LS-REF-007_Section_and_Detail_Views_Guide.pdf", available:true},
       ...base
     ];
   }
   if (unit === "5") {
     return [
-      {title:"Assembly Documentation Template", description:"Template for mechanisms, exploded views, BOMs, and notes.", href:null, available:false},
+      {title:"Assembly Documentation Guide", description:"Reference for exploded views, callouts, BOMs, notes, and assembly clarity.", href:"../../downloads/references/LS-REF-008_Assembly_Documentation_Guide.pdf", available:true},
       {title:"Motion Study Checklist", description:"Checklist for joints, range of motion, clearances, and animations.", href:null, available:false},
       ...base
     ];
   }
   if (unit === "6") {
     return [
+      {title:"Dimensioning Guide", description:"Reference for inspection dimensions and prototype measurement clarity.", href:"../../downloads/references/LS-REF-004_Dimensioning_Guide.pdf", available:true},
       {title:"Prototype Planning Worksheet", description:"Plan materials, manufacturing process, testing, and risk before building.", href:null, available:false},
       ...base
     ];
   }
   return [
-    {title:"Capstone Planning Worksheet", description:"Plan requirements, roles, milestones, and evidence for the capstone.", href:null, available:false},
-    {title:"Decision Matrix Template", description:"Compare design concepts using weighted criteria.", href:null, available:false},
-    {title:"Design Review Form", description:"Record feedback, risks, decisions, and next steps.", href:null, available:false},
+    {title:"Decision Matrix Template", description:"Compare design concepts using weighted criteria.", href:"../../downloads/editable-xlsx/LS-TMP-005_Decision_Matrix.xlsx", available:true},
+    {title:"Design Review Form", description:"Record feedback, risks, decisions, and next steps.", href:"../../downloads/templates/LS-TMP-006_Design_Review_Form.pdf", available:true},
+    {title:"Assembly Documentation Guide", description:"Reference for final assembly documentation and capstone communication.", href:"../../downloads/references/LS-REF-008_Assembly_Documentation_Guide.pdf", available:true},
     ...base
   ];
 }
