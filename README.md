@@ -33,3 +33,9 @@ Large image assets were compressed for upload-friendly previews. Full-size downl
 ## RC5d Certification Login Cacheproof Build
 
 Certification auth scripts include cache-busting query strings and auth.js contains a fallback Apps Script Web App URL.
+
+
+## RC20b Backend URL Update
+
+Certification backend URL updated to:
+https://script.google.com/macros/s/AKfycbw0j9MBMdMG-QNi2IIbp1SE6htXwYgKVV65dV1gLMMTkyK6ujNBWYXtIl-1Jnjlyns/exec
