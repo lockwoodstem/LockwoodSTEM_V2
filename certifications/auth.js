@@ -1,5 +1,5 @@
 (function () {
-  const fallbackWebAppUrl = "https://script.google.com/macros/s/AKfycbwiN01iliYfHTwp3gYEUAkFa4yU-XXWmS1kwhZdmnS5fgFBptc-EWd_hwE87d2njzSB/exec";
+  const fallbackWebAppUrl = "https://script.google.com/macros/s/AKfycbzBnDqSe5FbqcW2HLJ7yNzgX2i3y-q1MoAbrJ83pPu-ohKbmfQxnXxn3vsDZO_zEfh5/exec";
   const cfg = window.LOCKWOOD_CERT_AUTH || {};
   if (!cfg.WEB_APP_URL) cfg.WEB_APP_URL = fallbackWebAppUrl;
   const sessionKey = cfg.SESSION_KEY || "lockwoodstem_cert_session";
