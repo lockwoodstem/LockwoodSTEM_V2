@@ -721,3 +721,104 @@ main .btn.secondary,
   outline: 3px solid rgba(200, 162, 74, 0.38);
   outline-offset: 2px;
 }
+
+
+/* RC6: Engineering Safety Certification module */
+.cert-step-card h2 {
+  font-size: 1.45rem;
+}
+
+.cert-study .card {
+  align-content: start;
+}
+
+.cert-callout-card {
+  margin-top: 1.35rem;
+}
+
+.cert-quiz-form {
+  display: grid;
+  gap: 1.15rem;
+  margin: 1.25rem 0;
+}
+
+.cert-question {
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 1rem;
+  padding: 1rem;
+  background: #ffffff;
+}
+
+.cert-question legend {
+  color: #0b1f3a;
+  font-weight: 900;
+  padding: 0 0.25rem;
+}
+
+.cert-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin-top: 0.7rem;
+  color: #1f2937;
+  font-weight: 650;
+}
+
+.cert-choice input {
+  margin-top: 0.2rem;
+  accent-color: #c8a24a;
+}
+
+.cert-feedback {
+  margin: 0.75rem 0 0;
+  padding: 0.65rem 0.8rem;
+  border-radius: 0.75rem;
+  font-weight: 800;
+}
+
+.cert-feedback.correct {
+  background: rgba(22, 101, 52, 0.10);
+  color: #14532d;
+}
+
+.cert-feedback.incorrect {
+  background: rgba(185, 28, 28, 0.10);
+  color: #7f1d1d;
+}
+
+.cert-result-box,
+.cert-status-panel {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.cert-result-box h3,
+.cert-status-panel h3 {
+  color: #0b1f3a;
+  margin-top: 0;
+}
+
+.cert-result-box.passed,
+.cert-status-panel.passed {
+  border-color: rgba(22, 101, 52, 0.30);
+  background: rgba(22, 101, 52, 0.08);
+}
+
+.cert-result-box.failed,
+.cert-status-panel.failed {
+  border-color: rgba(185, 28, 28, 0.28);
+  background: rgba(185, 28, 28, 0.08);
+}
+
+.cert-result-box.warning {
+  border-color: rgba(200, 162, 74, 0.45);
+  background: rgba(200, 162, 74, 0.12);
+}
+
+.cert-account-status-card {
+  margin-top: 1.5rem;
+}

@@ -81,6 +81,12 @@ document.addEventListener("DOMContentLoaded", () => {
         <a class="btn" href="index.html">Back to Certifications</a>
         <button class="btn secondary" type="button" data-account-logout>Log out</button>
       </div>
+      <section class="cert-account-status-card" aria-live="polite">
+        <h2>Certification progress</h2>
+        <div data-cert-status data-cert-id="engineering-safety">
+          <p class="muted">Loading certification status...</p>
+        </div>
+      </section>
     `;
     accountBox.querySelector("[data-account-logout]").addEventListener("click", () => {
       auth.clearSession();

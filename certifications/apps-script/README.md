@@ -30,3 +30,14 @@ certifications/auth-config.js
 - The certification hub and all certification pages redirect to login when no valid session exists.
 - Passwords are stored as salted SHA-256 hashes in the Google Sheet, not as plain text.
 - This is appropriate for a classroom certification portal, not for high-security applications.
+
+
+## RC6 Engineering Safety Certification
+
+This backend now also creates a `Certifications` sheet. The Engineering Safety final test submits student answers to Apps Script, where the answer key is scored. Passing score is 80%.
+
+Supported certification actions:
+- `submitCertification`
+- `getCertificationStatus`
+
+After replacing `Code.gs`, run `setup` again so the `Certifications` tab is created.

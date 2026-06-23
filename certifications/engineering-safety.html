@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" class="cert-auth-checking">
 <head>
-<title>Engineering Safety | LockwoodSTEM</title>
+<title>Engineering Safety Certification | LockwoodSTEM</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../assets/css/styles.css">
 <script defer src="../assets/js/main.js"></script>
-<script src="auth-config.js?v=rc5d"></script>
-<script defer src="auth.js?v=rc5d"></script>
-<script defer src="auth-guard.js?v=rc5d"></script>
+<script src="auth-config.js?v=rc6"></script>
+<script defer src="auth.js?v=rc6"></script>
+<script defer src="auth-guard.js?v=rc6"></script>
+
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -30,37 +31,55 @@
   <div class="container hero-grid">
     <div>
       <div class="eyebrow">Certification</div>
-      <h1>Engineering Safety</h1>
-      <p>Required tool-readiness certification for safe work habits and lab expectations.</p>
-      <div class="hero-actions"><a class="btn" href="index.html">Back to Certifications</a><a class="btn secondary" href="../resources/index.html">Resources</a></div>
+      <h1>Engineering Safety Certification</h1>
+      <p>Complete the study guide, practice check, and final test to show readiness for safe engineering and supervised FabLab work.</p>
+      <div class="hero-actions">
+        <a class="btn" href="engineering-safety-study.html">Start Study Guide</a>
+        <a class="btn secondary" href="index.html">Back to Certifications</a>
+      </div>
     </div>
     <aside class="card dark">
       <span class="tag">Passing Score</span>
       <h3>80%</h3>
-      <p>Unlocks FabLab equipment/tool access</p>
+      <p>Required before any tool-specific FabLab certification can unlock equipment access.</p>
     </aside>
   </div>
 </section>
+
 <section class="container">
-  <div class="grid two">
-    <article class="card"><h2>Overview</h2><p>This certification verifies that you understand the essential skills, expectations, and evidence required for this area.</p></article>
-    <article class="card"><h2>Required Skills</h2><ul class="unit-meta-list"><li>Explain the purpose of the skill or tool.</li><li>Follow safety and quality expectations.</li><li>Complete a practice task.</li><li>Submit certification evidence.</li></ul></article>
-    <article class="card"><h2>Study Guide</h2><p>Review vocabulary, examples, procedures, and common mistakes before taking the practice test.</p></article>
-    <article class="card"><h2>Practice Test</h2><p>Use the practice test to check readiness before attempting the final certification test.</p></article>
-    <article class="card"><h2>Final Test</h2><p>Score at least 80% to pass. Retake expectations are set by the instructor.</p></article>
-    <article class="card"><h2>Certificate Info</h2><p>After passing, your certification can be recorded for class progress. Tool-access certifications may be used to determine supervised FabLab tool readiness.</p></article>
+  <div class="grid three">
+    <article class="card cert-step-card">
+      <span class="status-pill">Step 1</span>
+      <h2>Study Guide</h2>
+      <p>Review lab expectations, PPE, emergency procedures, tool boundaries, housekeeping, and reporting expectations.</p>
+      <a class="btn dark small" href="engineering-safety-study.html">Open Study Guide</a>
+    </article>
+    <article class="card cert-step-card">
+      <span class="status-pill">Step 2</span>
+      <h2>Practice Check</h2>
+      <p>Try a low-stakes practice quiz with instant feedback before taking the final test.</p>
+      <a class="btn dark small" href="engineering-safety-practice.html">Open Practice Check</a>
+    </article>
+    <article class="card cert-step-card">
+      <span class="status-pill ready">Step 3</span>
+      <h2>Final Test</h2>
+      <p>Submit your scored certification attempt. A score of 80% or higher records a passing certification.</p>
+      <a class="btn dark small" href="engineering-safety-final.html">Take Final Test</a>
+    </article>
   </div>
 </section>
 
-</main>
-<footer class="footer">
-  <div class="container footer-grid">
-    <div>
-      <img class="footer-logo" src="../assets/img/lockwoodstem-concept-a1-black-transparent.png" alt="LockwoodSTEM logo">
-      <div class="footer-note">A student engineering hub for design, fabrication, and aerospace innovation.</div>
+<section class="container">
+  <article class="card">
+    <h2>Certification status</h2>
+    <div data-cert-status data-cert-id="engineering-safety">
+      <p class="muted">Loading your certification status...</p>
     </div>
-    <div class="footer-links"><a href="../courses.html">Courses</a> <a href="../agenda.html">Daily Agenda</a> <a href="../resources/index.html">Resources</a> <a href="index.html">Certifications</a> <a href="../fablab/index.html">FabLab</a> <a href="../about/index.html">About</a></div>
-  </div>
-</footer>
+  </article>
+</section>
+
+<script defer src="certification-status.js?v=rc6"></script>
+</main>
+<footer class="site-footer"><div class="container"><p>LockwoodSTEM</p></div></footer>
 </body>
 </html>

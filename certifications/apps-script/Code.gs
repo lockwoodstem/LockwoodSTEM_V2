@@ -11,6 +11,7 @@
 
 const SHEET_USERS = 'Users';
 const SHEET_SESSIONS = 'Sessions';
+const SHEET_CERTIFICATIONS = 'Certifications';
 
 function doGet() {
   return json_({
@@ -36,6 +37,8 @@ function doPost(e) {
     if (action === 'login') return login_(payload);
     if (action === 'validate') return validate_(payload);
     if (action === 'logout') return logout_(payload);
+    if (action === 'submitcertification') return submitCertification_(payload);
+    if (action === 'getcertificationstatus') return getCertificationStatus_(payload);
 
     return json_({ ok: false, error: 'Unknown account action.' });
   } catch (err) {
@@ -64,6 +67,17 @@ function setup_() {
       'token', 'userId', 'createdAt', 'expiresAt', 'revokedAt'
     ]);
     sessions.setFrozenRows(1);
+  }
+
+  let certs = ss.getSheetByName(SHEET_CERTIFICATIONS);
+  if (!certs) {
+    certs = ss.insertSheet(SHEET_CERTIFICATIONS);
+    certs.appendRow([
+      'attemptId', 'timestamp', 'userId', 'firstName', 'lastName', 'email',
+      'studentId', 'period', 'certId', 'certName', 'scorePercent',
+      'correct', 'total', 'passed', 'answersJson'
+    ]);
+    certs.setFrozenRows(1);
   }
 }
 
@@ -195,6 +209,177 @@ function logout_(payload) {
 
   return json_({ ok: true });
 }
+
+
+function submitCertification_(payload) {
+  const token = clean_(payload.token);
+  const certId = clean_(payload.certId);
+  const certName = clean_(payload.certName) || certId;
+  const answers = payload.answers || {};
+
+  if (!token) return json_({ ok: false, error: 'Missing session token.' });
+  if (certId !== 'engineering-safety') {
+    return json_({ ok: false, error: 'Unknown certification.' });
+  }
+
+  const auth = validateTokenForServer_(token);
+  if (!auth.ok) return json_(auth);
+
+  const score = scoreEngineeringSafety_(answers);
+  const passed = score.percent >= 80;
+  const now = new Date().toISOString();
+  const attemptId = Utilities.getUuid();
+
+  const certs = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_CERTIFICATIONS);
+  certs.appendRow([
+    attemptId,
+    now,
+    auth.user.userId,
+    auth.user.firstName,
+    auth.user.lastName,
+    auth.user.email,
+    auth.user.studentId,
+    auth.user.period,
+    certId,
+    certName,
+    score.percent,
+    score.correct,
+    score.total,
+    passed,
+    JSON.stringify(answers)
+  ]);
+
+  return json_({
+    ok: true,
+    attemptId: attemptId,
+    certId: certId,
+    certName: certName,
+    percent: score.percent,
+    correct: score.correct,
+    total: score.total,
+    passed: passed,
+    recordedAt: now
+  });
+}
+
+function getCertificationStatus_(payload) {
+  const token = clean_(payload.token);
+  const certId = clean_(payload.certId);
+  if (!token) return json_({ ok: false, error: 'Missing session token.' });
+
+  const auth = validateTokenForServer_(token);
+  if (!auth.ok) return json_(auth);
+
+  const certs = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_CERTIFICATIONS);
+  const values = certs.getDataRange().getValues();
+
+  let attempts = 0;
+  let bestPercent = 0;
+  let lastAttemptAt = '';
+  let certifiedAt = '';
+  let passed = false;
+
+  for (let i = 1; i < values.length; i++) {
+    const row = values[i];
+    const rowUserId = String(row[2]);
+    const rowCertId = String(row[8]);
+    if (rowUserId !== String(auth.user.userId) || rowCertId !== String(certId)) continue;
+
+    attempts++;
+    const timestamp = String(row[1]);
+    const percent = Number(row[10]) || 0;
+    const rowPassed = String(row[13]).toLowerCase() === 'true';
+
+    if (!lastAttemptAt || new Date(timestamp) > new Date(lastAttemptAt)) {
+      lastAttemptAt = timestamp;
+    }
+    if (percent > bestPercent) bestPercent = percent;
+    if (rowPassed) {
+      passed = true;
+      if (!certifiedAt || new Date(timestamp) < new Date(certifiedAt)) {
+        certifiedAt = timestamp;
+      }
+    }
+  }
+
+  return json_({
+    ok: true,
+    status: {
+      certId: certId,
+      hasAttempt: attempts > 0,
+      attempts: attempts,
+      bestPercent: bestPercent,
+      lastAttemptAt: lastAttemptAt,
+      passed: passed,
+      certifiedAt: certifiedAt
+    }
+  });
+}
+
+function validateTokenForServer_(token) {
+  const sessions = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_SESSIONS);
+  const values = sessions.getDataRange().getValues();
+  const now = new Date();
+
+  for (let i = 1; i < values.length; i++) {
+    const row = values[i];
+    if (String(row[0]) === String(token)) {
+      const userId = row[1];
+      const expiresAt = new Date(row[3]);
+      const revokedAt = row[4];
+
+      if (revokedAt) return { ok: false, error: 'Session has been logged out.' };
+      if (expiresAt < now) return { ok: false, error: 'Session has expired.' };
+
+      const found = findUserById_(userId);
+      if (!found) return { ok: false, error: 'Account not found.' };
+      if (String(found.user.status).toLowerCase() !== 'active') {
+        return { ok: false, error: 'This account is not active.' };
+      }
+
+      return { ok: true, user: found.user };
+    }
+  }
+  return { ok: false, error: 'Invalid session token.' };
+}
+
+function scoreEngineeringSafety_(answers) {
+  const key = {
+    q1: 'complete instruction/certification and receive permission',
+    q2: 'fabricating, cutting, drilling, sanding, soldering, or using powered equipment',
+    q3: 'report it and do not use it',
+    q4: 'get caught in moving equipment',
+    q5: 'catch and pull a hand toward moving parts',
+    q6: 'stop work and alert the teacher immediately',
+    q7: 'never acceptable',
+    q8: 'not be used until approved by the teacher',
+    q9: 'only after the machine fully stops',
+    q10: 'keep materials secure and hands away from danger',
+    q11: 'not operate it',
+    q12: 'it allows safe movement and emergency access',
+    q13: 'a broken bit, damaged cord, missing guard, or unusual machine behavior',
+    q14: 'help identify hazards before someone gets hurt',
+    q15: 'return tools, clean the area, and secure materials',
+    q16: 'for immediate safety concerns',
+    q17: 'they are unsure about a tool, material, setup, or procedure',
+    q18: 'handled carefully and allowed to cool or be deburred when needed',
+    q19: 'the student, classmates, equipment, and workspace',
+    q20: 'pause when unsure, communicate concerns, and follow the approved process'
+  };
+
+  let correct = 0;
+  const total = Object.keys(key).length;
+  Object.keys(key).forEach(function (id) {
+    if (String(answers[id] || '').trim() === key[id]) correct++;
+  });
+
+  return {
+    correct: correct,
+    total: total,
+    percent: Math.round((correct / total) * 100)
+  };
+}
+
 
 function createSession_(userId) {
   const sessions = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_SESSIONS);
