@@ -1,5 +1,7 @@
 (function () {
+  const fallbackWebAppUrl = "https://script.google.com/macros/s/AKfycbwiN01iliYfHTwp3gYEUAkFa4yU-XXWmS1kwhZdmnS5fgFBptc-EWd_hwE87d2njzSB/exec";
   const cfg = window.LOCKWOOD_CERT_AUTH || {};
+  if (!cfg.WEB_APP_URL) cfg.WEB_APP_URL = fallbackWebAppUrl;
   const sessionKey = cfg.SESSION_KEY || "lockwoodstem_cert_session";
   const profileKey = cfg.PROFILE_KEY || "lockwoodstem_cert_profile";
 
@@ -111,8 +113,8 @@
           <span class="cert-account-role">${escapeHtml(role)}</span>
         </div>
         <div class="cert-account-actions">
-          <a class="btn small secondary" href="account.html">Account</a>
-          <button class="btn small" type="button" data-cert-logout>Log out</button>
+          <a class="btn small secondary cert-account-btn" href="account.html">Account</a>
+          <button class="btn small cert-logout-btn" type="button" data-cert-logout aria-label="Log out of certification account">Log out</button>
         </div>
       </div>
     `;

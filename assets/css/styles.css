@@ -656,3 +656,68 @@ span.btn.disabled{
     display: grid;
   }
 }
+
+
+/* RC5e: make secondary button labels visible on light cards/pages */
+main .btn.secondary,
+.card .btn.secondary,
+.cert-auth-form .btn.secondary,
+.cert-account-actions .btn.secondary {
+  background: #ffffff;
+  color: var(--navy);
+  border-color: rgba(11, 31, 58, 0.28);
+  box-shadow: 0 8px 18px rgba(11, 31, 58, 0.08);
+}
+
+/* Keep secondary buttons light-on-dark inside dark hero sections and dark cards */
+.hero .btn.secondary,
+.page-hero .btn.secondary,
+.card.dark .btn.secondary {
+  background: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.30);
+}
+
+
+/* RC5f: certification account bar visibility fix */
+.cert-account-bar {
+  background: #f8fafc;
+  color: #0b1f3a;
+  border-top: 1px solid rgba(11, 31, 58, 0.08);
+  border-bottom: 1px solid rgba(11, 31, 58, 0.18);
+}
+
+.cert-account-bar strong,
+.cert-account-bar span,
+.cert-account-bar div {
+  color: #0b1f3a;
+}
+
+.cert-account-bar .cert-account-role {
+  background: rgba(200, 162, 74, 0.22);
+  color: #0b1f3a;
+  border: 1px solid rgba(200, 162, 74, 0.45);
+}
+
+.cert-account-bar .btn,
+.cert-account-bar a.btn,
+.cert-account-bar button.btn {
+  color: #0b1f3a !important;
+  background: #c8a24a;
+  border-color: #c8a24a;
+}
+
+.cert-account-bar .btn.secondary,
+.cert-account-bar a.btn.secondary,
+.cert-account-bar button.btn.secondary {
+  color: #0b1f3a !important;
+  background: #ffffff;
+  border-color: rgba(11, 31, 58, 0.28);
+}
+
+.cert-account-bar .btn:hover,
+.cert-account-bar .btn:focus {
+  color: #0b1f3a !important;
+  outline: 3px solid rgba(200, 162, 74, 0.38);
+  outline-offset: 2px;
+}

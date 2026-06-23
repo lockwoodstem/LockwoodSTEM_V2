@@ -28,3 +28,8 @@ This version replaces the many individual IED lesson files with one dynamic page
 
 The course content remains reviewable, but the `courses` folder is much smaller and easier to upload through GitHub's web uploader.
 Large image assets were compressed for upload-friendly previews. Full-size downloads are in the separate Resource Downloads Pack.
+
+
+## RC5d Certification Login Cacheproof Build
+
+Certification auth scripts include cache-busting query strings and auth.js contains a fallback Apps Script Web App URL.
