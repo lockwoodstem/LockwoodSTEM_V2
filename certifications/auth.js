@@ -1,5 +1,5 @@
 (function () {
-  const fallbackWebAppUrl = "https://script.google.com/macros/s/AKfycbzBnDqSe5FbqcW2HLJ7yNzgX2i3y-q1MoAbrJ83pPu-ohKbmfQxnXxn3vsDZO_zEfh5/exec";
+  const fallbackWebAppUrl = "https://script.google.com/macros/s/AKfycbydGWTZene-IFYiMlD-9zTaV-bQNbrRc_cEkbsPa8nsSy6fiNa4X9_X3hOw4rheNSGG/exec";
   const cfg = window.LOCKWOOD_CERT_AUTH || {};
   if (!cfg.WEB_APP_URL) cfg.WEB_APP_URL = fallbackWebAppUrl;
   const sessionKey = cfg.SESSION_KEY || "lockwoodstem_cert_session";
@@ -108,9 +108,12 @@
     bar.className = "cert-account-bar";
     bar.innerHTML = `
       <div class="container cert-account-inner">
-        <div>
+        <div class="cert-account-identity">
           <strong>Signed in:</strong> <span>${escapeHtml(displayName)}</span>
           <span class="cert-account-role">${escapeHtml(role)}</span>
+        </div>
+        <div class="micro-badge-strip" data-microbadge-strip aria-label="Certification microcredential badges">
+          <span class="micro-badge-loading">Loading badges...</span>
         </div>
         <div class="cert-account-actions">
           <a class="btn small secondary cert-account-btn" href="account.html">Account</a>
@@ -119,6 +122,7 @@
       </div>
     `;
     main.prepend(bar);
+    if (window.LockwoodMicroBadges && window.LockwoodMicroBadges.refresh) window.LockwoodMicroBadges.refresh();
     document.querySelectorAll("[data-cert-logout]").forEach((btn) => {
       if (btn.dataset.logoutReady === "true") return;
       btn.dataset.logoutReady = "true";

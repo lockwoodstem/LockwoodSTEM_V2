@@ -41,3 +41,26 @@ Supported certification actions:
 - `getCertificationStatus`
 
 After replacing `Code.gs`, run `setup` again so the `Certifications` tab is created.
+
+
+## RC7 Microcredential Badges
+
+The backend now supports `getAllCertificationStatuses`, which lets the site show earned and locked badge states in the signed-in account bar and account page.
+
+
+## RC8 Teacher Hands-on Approval
+
+This backend now creates a `HandsOn` sheet and supports teacher-only hands-on approvals.
+
+New public setup function:
+- `promoteTeacherAccount`
+
+Teacher setup:
+1. Create your normal certification account on the website.
+2. In Apps Script Project Settings, set Script Property `TEACHER_EMAIL` to your teacher account email. If omitted, the default is `jdlockwo@gmail.com`.
+3. Run `promoteTeacherAccount`.
+4. Deploy a new Web App version.
+5. Open `certifications/teacher-login.html`.
+
+Badge rule:
+- A badge is earned only when the online test is passed and the hands-on portion is marked complete by a teacher.

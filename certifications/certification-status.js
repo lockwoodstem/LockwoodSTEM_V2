@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         token: session.token,
         certId
       });
-      if (!result.status || !result.status.hasAttempt) {
+      if (!result.status || (!result.status.hasAttempt && !result.status.handsOnComplete)) {
         box.innerHTML = `
           <p><strong>Status:</strong> Not certified yet</p>
           <p class="muted">Complete the final test with a score of 80% or higher.</p>
@@ -22,13 +22,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       const s = result.status;
+      const badgeEarned = !!s.badgeEarned;
+      const onlinePassed = !!s.onlinePassed || !!s.passed;
       box.innerHTML = `
-        <div class="cert-status-panel ${s.passed ? "passed" : "failed"}">
-          <h3>${s.passed ? "Certified" : "Attempt recorded"}</h3>
-          <p><strong>Best score:</strong> ${s.bestPercent}%</p>
-          <p><strong>Last attempt:</strong> ${new Date(s.lastAttemptAt).toLocaleString()}</p>
-          <p><strong>Attempts:</strong> ${s.attempts}</p>
-          ${s.passed ? `<p><strong>Certified on:</strong> ${new Date(s.certifiedAt).toLocaleDateString()}</p>` : `<p>Review the study guide and retake the final test when ready.</p>`}
+        <div class="cert-status-panel ${badgeEarned ? "passed" : (onlinePassed ? "warning" : "failed")}">
+          <h3>${badgeEarned ? "Badge earned" : (onlinePassed ? "Online test passed — hands-on pending" : "Attempt recorded")}</h3>
+          <p><strong>Best score:</strong> ${s.bestPercent || 0}%</p>
+          ${s.lastAttemptAt ? `<p><strong>Last attempt:</strong> ${new Date(s.lastAttemptAt).toLocaleString()}</p>` : ""}
+          <p><strong>Attempts:</strong> ${s.attempts || 0}</p>
+          <p><strong>Hands-on portion:</strong> ${s.handsOnComplete ? "Complete" : "Not complete"}</p>
+          ${badgeEarned && s.certifiedAt ? `<p><strong>Badge earned on:</strong> ${new Date(s.certifiedAt).toLocaleDateString()}</p>` : `<p>Badge unlocks after both the online test and teacher-approved hands-on portion are complete.</p>`}
         </div>
       `;
     } catch (err) {

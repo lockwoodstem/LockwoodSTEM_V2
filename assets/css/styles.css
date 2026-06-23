@@ -822,3 +822,277 @@ main .btn.secondary,
 .cert-account-status-card {
   margin-top: 1.5rem;
 }
+
+
+/* RC7: Microcredential badge strip and badge collection */
+.cert-account-inner {
+  display: grid;
+  grid-template-columns: minmax(180px, auto) minmax(280px, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cert-account-identity {
+  white-space: nowrap;
+}
+
+.micro-badge-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  overflow-x: auto;
+  padding: 0.15rem 0.25rem;
+  scrollbar-width: thin;
+}
+
+.micro-badge-loading {
+  color: #0b1f3a;
+  font-weight: 800;
+}
+
+.micro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
+  border-radius: 999px;
+  border: 1px solid rgba(11, 31, 58, 0.18);
+  padding: 0.35rem 0.55rem;
+  color: #0b1f3a;
+  background: #ffffff;
+  box-shadow: 0 6px 14px rgba(11, 31, 58, 0.08);
+  white-space: nowrap;
+}
+
+.micro-badge.compact {
+  padding: 0.28rem 0.48rem;
+  font-size: 0.78rem;
+}
+
+.micro-badge-icon {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 999px;
+  background: rgba(11, 31, 58, 0.08);
+  color: #0b1f3a;
+  font-size: 0.72rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.micro-badge-label {
+  font-weight: 900;
+  color: inherit;
+}
+
+.micro-badge-state {
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  opacity: 0.76;
+}
+
+.micro-badge.earned {
+  background: linear-gradient(135deg, #c8a24a, #f2d889);
+  border-color: rgba(11, 31, 58, 0.28);
+  color: #0b1f3a;
+}
+
+.micro-badge.earned .micro-badge-icon {
+  background: #0b1f3a;
+  color: #ffffff;
+}
+
+.micro-badge.locked {
+  background: #f1f5f9;
+  color: #64748b;
+  border-color: rgba(100, 116, 139, 0.30);
+}
+
+.micro-badge.locked .micro-badge-icon {
+  background: #e2e8f0;
+  color: #64748b;
+}
+
+.micro-badge:hover,
+.micro-badge:focus {
+  transform: translateY(-1px);
+  outline: 3px solid rgba(200, 162, 74, 0.35);
+  outline-offset: 2px;
+}
+
+.micro-badge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.micro-badge-card {
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 1rem;
+  padding: 1rem;
+  background: #ffffff;
+}
+
+.micro-badge-card.locked {
+  background: #f8fafc;
+}
+
+.micro-badge-card .micro-badge {
+  margin-bottom: 0.75rem;
+}
+
+.micro-badge-details h3 {
+  margin: 0 0 0.35rem;
+  color: #0b1f3a;
+}
+
+.micro-badge-details p {
+  margin: 0.25rem 0;
+  color: #475569;
+}
+
+@media (max-width: 920px) {
+  .cert-account-inner {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .micro-badge-strip {
+    max-width: 100%;
+  }
+
+  .micro-badge-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .micro-badge-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .micro-badge-state {
+    display: none;
+  }
+}
+
+
+/* RC8: Teacher hands-on approval dashboard */
+.teacher-dashboard-tools {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(220px, 0.45fr);
+  gap: 1rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.teacher-dashboard-tools label {
+  display: grid;
+  gap: 0.35rem;
+  color: #0b1f3a;
+  font-weight: 800;
+}
+
+.teacher-dashboard-tools input,
+.teacher-dashboard-tools select {
+  width: 100%;
+  border: 1px solid rgba(15, 23, 42, 0.24);
+  border-radius: 0.75rem;
+  padding: 0.75rem 0.85rem;
+  background: #ffffff;
+  color: #0f172a;
+  font: inherit;
+}
+
+.teacher-dashboard-status {
+  margin: 0.75rem 0 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 0.9rem;
+  background: #f8fafc;
+  color: #0b1f3a;
+  font-weight: 800;
+}
+
+.teacher-dashboard-status.error {
+  background: rgba(185, 28, 28, 0.10);
+  color: #7f1d1d;
+}
+
+.teacher-approval-table-wrap {
+  overflow-x: auto;
+}
+
+.teacher-approval-table {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: collapse;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 0.9rem;
+  overflow: hidden;
+}
+
+.teacher-approval-table th {
+  background: #0b1f3a;
+  color: #ffffff;
+  text-align: left;
+  padding: 0.75rem;
+  font-size: 0.86rem;
+}
+
+.teacher-approval-table td {
+  border-top: 1px solid rgba(15, 23, 42, 0.10);
+  padding: 0.75rem;
+  vertical-align: top;
+  color: #0f172a;
+}
+
+.teacher-approval-table tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.approval-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.32rem 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 900;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  color: #0b1f3a;
+  background: #ffffff;
+}
+
+.approval-pill.passed,
+.approval-pill.earned {
+  background: rgba(22, 101, 52, 0.10);
+  border-color: rgba(22, 101, 52, 0.28);
+  color: #14532d;
+}
+
+.approval-pill.locked {
+  background: #f1f5f9;
+  border-color: rgba(100, 116, 139, 0.28);
+  color: #64748b;
+}
+
+.teacher-note {
+  margin: 0.45rem 0 0;
+  color: #64748b;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .teacher-dashboard-tools {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cert-status-panel.warning {
+  border-color: rgba(200, 162, 74, 0.45);
+  background: rgba(200, 162, 74, 0.12);
+}

@@ -330,12 +330,12 @@
           answers
         });
 
-        const passed = response.passed;
+        const passed = response.onlinePassed || response.passed;
         resultBox.className = "cert-result-box " + (passed ? "passed" : "failed");
         resultBox.innerHTML = `
-          <h3>${passed ? "Certification passed" : "Certification not passed yet"}</h3>
+          <h3>${passed ? (response.badgeEarned ? "Badge earned" : "Online test passed") : "Certification not passed yet"}</h3>
           <p><strong>Score:</strong> ${response.percent}% (${response.correct} / ${response.total})</p>
-          <p>${passed ? "Your Engineering Safety Certification has been recorded." : "Review the study guide and try again when ready."}</p>
+          <p>${passed ? (response.badgeEarned ? "Your Engineering Safety badge has been earned." : "Your online test is passed. Your teacher still needs to mark the hands-on portion complete before the badge unlocks.") : "Review the study guide and try again when ready."}</p>
           <div class="hero-actions">
             <a class="btn dark" href="engineering-safety.html">Return to Certification Home</a>
             ${passed ? `<a class="btn secondary" href="account.html">View Account</a>` : `<a class="btn secondary" href="engineering-safety-study.html">Review Study Guide</a>`}

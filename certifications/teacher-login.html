@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" class="cert-auth-checking">
+<html lang="en" >
 <head>
-<title>Certification Account | LockwoodSTEM</title>
+<title>Teacher Certification Login | LockwoodSTEM</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../assets/css/styles.css">
 <script defer src="../assets/js/main.js"></script>
 <script src="auth-config.js?v=rc8b"></script>
 <script defer src="auth.js?v=rc8b"></script>
-<script defer src="auth-guard.js?v=rc8b"></script>
-<script defer src="badges.js?v=rc8b"></script>
-<script defer src="auth-forms.js?v=rc8b"></script>
+<script defer src="teacher.js?v=rc8b"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -27,20 +25,39 @@
   </div>
 </header>
 <main id="main">
+
 <section class="page-hero">
   <div class="container hero-grid">
     <div>
-      <div class="eyebrow">Certifications</div>
-      <h1>My certification account</h1>
-      <p>Review your student account information for certification access.</p>
+      <div class="eyebrow">Teacher Only</div>
+      <h1>Certification approval login</h1>
+      <p>Use this page to review student online test completion and mark hands-on portions complete.</p>
     </div>
+    <aside class="card dark">
+      <span class="tag">Restricted</span>
+      <h3>Teacher Access</h3>
+      <p>Only accounts with the teacher role can open the approval dashboard.</p>
+    </aside>
   </div>
 </section>
+
 <section class="container narrow">
-  <article class="card" data-account-box>
-    <h2>Loading account...</h2>
+  <article class="card">
+    <h2>Teacher login</h2>
+    <p>Log in with a certification account that has been assigned the teacher role.</p>
+    <form class="cert-auth-form" data-teacher-login-form>
+      <label>Email or teacher ID
+        <input name="identifier" type="text" autocomplete="username" required>
+      </label>
+      <label>Password
+        <input name="password" type="password" autocomplete="current-password" required>
+      </label>
+      <button class="btn dark" type="submit">Open Teacher Dashboard</button>
+      <p class="form-status" data-teacher-login-status hidden></p>
+    </form>
   </article>
 </section>
+
 </main>
 <footer class="site-footer"><div class="container"><p>LockwoodSTEM</p></div></footer>
 </body>

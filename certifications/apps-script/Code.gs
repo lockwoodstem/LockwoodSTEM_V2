@@ -12,6 +12,7 @@
 const SHEET_USERS = 'Users';
 const SHEET_SESSIONS = 'Sessions';
 const SHEET_CERTIFICATIONS = 'Certifications';
+const SHEET_HANDS_ON = 'HandsOn';
 
 function doGet() {
   return json_({
@@ -24,6 +25,20 @@ function doGet() {
 function setup() {
   setup_();
   return 'LockwoodSTEM certification account sheets created.';
+}
+
+function promoteTeacherAccount() {
+  setup_();
+  const teacherEmail = PropertiesService.getScriptProperties().getProperty('TEACHER_EMAIL') || 'jdlockwo@gmail.com';
+  const found = findUser_(teacherEmail, teacherEmail);
+  if (!found) {
+    return 'No user account found for ' + teacherEmail + '. Create the account first or set TEACHER_EMAIL in Script Properties.';
+  }
+  const users = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_USERS);
+  users.getRange(found.row, 3).setValue(new Date().toISOString());
+  users.getRange(found.row, 11).setValue('teacher');
+  users.getRange(found.row, 12).setValue('active');
+  return 'Teacher role assigned to ' + teacherEmail;
 }
 
 function doPost(e) {
@@ -39,6 +54,9 @@ function doPost(e) {
     if (action === 'logout') return logout_(payload);
     if (action === 'submitcertification') return submitCertification_(payload);
     if (action === 'getcertificationstatus') return getCertificationStatus_(payload);
+    if (action === 'getallcertificationstatuses') return getAllCertificationStatuses_(payload);
+    if (action === 'sethandsoncompletion') return setHandsOnCompletion_(payload);
+    if (action === 'getteacherdashboard') return getTeacherDashboard_(payload);
 
     return json_({ ok: false, error: 'Unknown account action.' });
   } catch (err) {
@@ -78,6 +96,16 @@ function setup_() {
       'correct', 'total', 'passed', 'answersJson'
     ]);
     certs.setFrozenRows(1);
+  }
+
+  let handsOn = ss.getSheetByName(SHEET_HANDS_ON);
+  if (!handsOn) {
+    handsOn = ss.insertSheet(SHEET_HANDS_ON);
+    handsOn.appendRow([
+      'recordId', 'timestamp', 'teacherUserId', 'teacherName',
+      'studentUserId', 'certId', 'completed', 'notes'
+    ]);
+    handsOn.setFrozenRows(1);
   }
 }
 
@@ -249,6 +277,7 @@ function submitCertification_(payload) {
     JSON.stringify(answers)
   ]);
 
+  const currentStatus = statusForUserCert_(auth.user.userId, certId);
   return json_({
     ok: true,
     attemptId: attemptId,
@@ -257,10 +286,14 @@ function submitCertification_(payload) {
     percent: score.percent,
     correct: score.correct,
     total: score.total,
-    passed: passed,
+    onlinePassed: passed,
+    passed: currentStatus.badgeEarned,
+    handsOnComplete: currentStatus.handsOnComplete,
+    badgeEarned: currentStatus.badgeEarned,
     recordedAt: now
   });
 }
+
 
 function getCertificationStatus_(payload) {
   const token = clean_(payload.token);
@@ -270,6 +303,147 @@ function getCertificationStatus_(payload) {
   const auth = validateTokenForServer_(token);
   if (!auth.ok) return json_(auth);
 
+  return json_({
+    ok: true,
+    status: statusForUserCert_(auth.user.userId, certId)
+  });
+}
+
+function getAllCertificationStatuses_(payload) {
+  const token = clean_(payload.token);
+  if (!token) return json_({ ok: false, error: 'Missing session token.' });
+
+  const auth = validateTokenForServer_(token);
+  if (!auth.ok) return json_(auth);
+
+  const certIds = getCertificationIds_();
+  const statuses = {};
+  certIds.forEach(function (certId) {
+    statuses[certId] = statusForUserCert_(auth.user.userId, certId);
+  });
+
+  return json_({
+    ok: true,
+    statuses: statuses
+  });
+}
+
+function getTeacherDashboard_(payload) {
+  const token = clean_(payload.token);
+  if (!token) return json_({ ok: false, error: 'Missing session token.' });
+
+  const auth = validateTokenForServer_(token);
+  if (!auth.ok) return json_(auth);
+  if (String(auth.user.role).toLowerCase() !== 'teacher') {
+    return json_({ ok: false, error: 'Teacher access is required.' });
+  }
+
+  const users = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_USERS);
+  const values = users.getDataRange().getValues();
+  const certIds = getCertificationIds_();
+  const students = [];
+
+  for (let i = 1; i < values.length; i++) {
+    const user = rowToUser_(values[i]);
+    if (String(user.role).toLowerCase() === 'teacher') continue;
+    if (String(user.status).toLowerCase() !== 'active') continue;
+
+    const statuses = {};
+    certIds.forEach(function (certId) {
+      statuses[certId] = statusForUserCert_(user.userId, certId);
+    });
+
+    students.push({
+      userId: user.userId,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      fullName: [user.firstName, user.lastName].filter(Boolean).join(' '),
+      email: user.email,
+      studentId: user.studentId,
+      period: user.period,
+      statuses: statuses
+    });
+  }
+
+  return json_({
+    ok: true,
+    teacher: publicUser_(auth.user),
+    certifications: getCertificationList_(),
+    students: students
+  });
+}
+
+function setHandsOnCompletion_(payload) {
+  const token = clean_(payload.token);
+  const studentUserId = clean_(payload.studentUserId);
+  const certId = clean_(payload.certId);
+  const completed = String(payload.completed).toLowerCase() === 'true';
+  const notes = clean_(payload.notes);
+
+  if (!token) return json_({ ok: false, error: 'Missing session token.' });
+  if (!studentUserId || !certId) return json_({ ok: false, error: 'Missing student or certification.' });
+
+  const auth = validateTokenForServer_(token);
+  if (!auth.ok) return json_(auth);
+  if (String(auth.user.role).toLowerCase() !== 'teacher') {
+    return json_({ ok: false, error: 'Teacher access is required.' });
+  }
+
+  const student = findUserById_(studentUserId);
+  if (!student) return json_({ ok: false, error: 'Student account not found.' });
+
+  const status = statusForUserCert_(studentUserId, certId);
+  if (requiresOnlineTest_(certId) && !status.onlinePassed && completed) {
+    return json_({ ok: false, error: 'Online test must be passed before hands-on completion can be marked.' });
+  }
+
+  const handsOn = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_HANDS_ON);
+  handsOn.appendRow([
+    Utilities.getUuid(),
+    new Date().toISOString(),
+    auth.user.userId,
+    [auth.user.firstName, auth.user.lastName].filter(Boolean).join(' '),
+    studentUserId,
+    certId,
+    completed,
+    notes
+  ]);
+
+  return json_({
+    ok: true,
+    status: statusForUserCert_(studentUserId, certId)
+  });
+}
+
+function statusForUserCert_(userId, certId) {
+  const online = onlineStatusForUserCert_(userId, certId);
+  const hands = handsOnStatusForUserCert_(userId, certId);
+  const requiresHandsOn = true;
+  const requiresOnline = requiresOnlineTest_(certId);
+  const onlinePassed = requiresOnline ? online.onlinePassed : false;
+  const handsOnComplete = hands.completed;
+  const badgeEarned = requiresOnline ? (onlinePassed && handsOnComplete) : handsOnComplete;
+  const certifiedAt = badgeEarned ? (hands.timestamp || online.certifiedAt || '') : '';
+
+  return {
+    certId: certId,
+    hasAttempt: online.hasAttempt,
+    attempts: online.attempts,
+    bestPercent: online.bestPercent,
+    lastAttemptAt: online.lastAttemptAt,
+    onlinePassed: onlinePassed,
+    passed: badgeEarned,
+    requiresHandsOn: requiresHandsOn,
+    requiresOnline: requiresOnline,
+    handsOnComplete: handsOnComplete,
+    handsOnAt: hands.timestamp,
+    handsOnTeacher: hands.teacherName,
+    badgeEarned: badgeEarned,
+    certifiedAt: certifiedAt
+  };
+}
+
+function onlineStatusForUserCert_(userId, certId) {
   const certs = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_CERTIFICATIONS);
   const values = certs.getDataRange().getValues();
 
@@ -277,13 +451,13 @@ function getCertificationStatus_(payload) {
   let bestPercent = 0;
   let lastAttemptAt = '';
   let certifiedAt = '';
-  let passed = false;
+  let onlinePassed = false;
 
   for (let i = 1; i < values.length; i++) {
     const row = values[i];
     const rowUserId = String(row[2]);
     const rowCertId = String(row[8]);
-    if (rowUserId !== String(auth.user.userId) || rowCertId !== String(certId)) continue;
+    if (rowUserId !== String(userId) || rowCertId !== String(certId)) continue;
 
     attempts++;
     const timestamp = String(row[1]);
@@ -295,25 +469,74 @@ function getCertificationStatus_(payload) {
     }
     if (percent > bestPercent) bestPercent = percent;
     if (rowPassed) {
-      passed = true;
+      onlinePassed = true;
       if (!certifiedAt || new Date(timestamp) < new Date(certifiedAt)) {
         certifiedAt = timestamp;
       }
     }
   }
 
-  return json_({
-    ok: true,
-    status: {
-      certId: certId,
-      hasAttempt: attempts > 0,
-      attempts: attempts,
-      bestPercent: bestPercent,
-      lastAttemptAt: lastAttemptAt,
-      passed: passed,
-      certifiedAt: certifiedAt
+  return {
+    hasAttempt: attempts > 0,
+    attempts: attempts,
+    bestPercent: bestPercent,
+    lastAttemptAt: lastAttemptAt,
+    onlinePassed: onlinePassed,
+    certifiedAt: certifiedAt
+  };
+}
+
+function handsOnStatusForUserCert_(userId, certId) {
+  const handsOn = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_HANDS_ON);
+  const values = handsOn.getDataRange().getValues();
+
+  let latest = null;
+  for (let i = 1; i < values.length; i++) {
+    const row = values[i];
+    const rowUserId = String(row[4]);
+    const rowCertId = String(row[5]);
+    if (rowUserId !== String(userId) || rowCertId !== String(certId)) continue;
+    if (!latest || new Date(row[1]) > new Date(latest.timestamp)) {
+      latest = {
+        timestamp: String(row[1]),
+        teacherName: String(row[3]),
+        completed: String(row[6]).toLowerCase() === 'true',
+        notes: String(row[7] || '')
+      };
     }
-  });
+  }
+
+  return latest || {
+    timestamp: '',
+    teacherName: '',
+    completed: false,
+    notes: ''
+  };
+}
+
+function getCertificationList_() {
+  return [
+    { certId: 'engineering-safety', label: 'Engineering Safety', hasOnline: true },
+    { certId: 'technical-sketching', label: 'Technical Sketching', hasOnline: false },
+    { certId: 'engineering-documentation', label: 'Engineering Documentation', hasOnline: false },
+    { certId: 'fusion-cad-level-1', label: 'Fusion CAD Level 1', hasOnline: false },
+    { certId: 'engineering-drawings', label: 'Engineering Drawings', hasOnline: false },
+    { certId: 'fusion-cad-level-2', label: 'Fusion CAD Level 2', hasOnline: false },
+    { certId: '3d-printing', label: '3D Printing', hasOnline: false },
+    { certId: 'laser-cutting', label: 'Laser Cutting', hasOnline: false },
+    { certId: 'cnc', label: 'CNC Mill', hasOnline: false },
+    { certId: 'drill-press', label: 'Drill Press', hasOnline: false },
+    { certId: 'soldering', label: 'Soldering', hasOnline: false },
+    { certId: 'hand-cutting-tools', label: 'Hand & Cutting Tools', hasOnline: false }
+  ];
+}
+
+function getCertificationIds_() {
+  return getCertificationList_().map(function (cert) { return cert.certId; });
+}
+
+function requiresOnlineTest_(certId) {
+  return certId === 'engineering-safety';
 }
 
 function validateTokenForServer_(token) {

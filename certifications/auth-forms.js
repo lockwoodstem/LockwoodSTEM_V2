@@ -87,6 +87,13 @@ document.addEventListener("DOMContentLoaded", () => {
           <p class="muted">Loading certification status...</p>
         </div>
       </section>
+      <section class="cert-account-status-card">
+        <h2>Microcredential badges</h2>
+        <p class="muted">Earned badges appear in full color. Locked badges show certifications still to complete.</p>
+        <div class="micro-badge-grid" data-microbadge-grid>
+          <p class="muted">Loading badges...</p>
+        </div>
+      </section>
     `;
     accountBox.querySelector("[data-account-logout]").addEventListener("click", () => {
       auth.clearSession();

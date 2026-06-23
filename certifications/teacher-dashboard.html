@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" class="cert-auth-checking">
+<head>
+<title>Teacher Certification Dashboard | LockwoodSTEM</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<script defer src="../assets/js/main.js"></script>
+<script src="auth-config.js?v=rc8b"></script>
+<script defer src="auth.js?v=rc8b"></script>
+<script defer src="auth-guard.js?v=rc8b"></script>
+<script defer src="teacher.js?v=rc8b"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="../index.html" aria-label="LockwoodSTEM home">
+      <img class="brand-logo" src="../assets/img/lockwoodstem-concept-a1-black-transparent.png" alt="LockwoodSTEM logo">
+      <span class="brand-text"><span class="brand-title">LockwoodSTEM</span><span class="brand-sub">Student Engineering Hub</span></span>
+    </a>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">Menu</button>
+    <ul class="nav-links">
+      <li><a href="../courses.html">Courses</a></li><li><a href="../agenda.html">Daily Agenda</a></li><li><a href="../resources/index.html">Resources</a></li><li><a href="index.html" aria-current="page">Certifications</a></li><li><a href="../fablab/index.html">FabLab</a></li><li><a href="../about/index.html">About</a></li>
+    </ul>
+  </div>
+</header>
+<main id="main">
+
+<section class="page-hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Teacher Dashboard</div>
+      <h1>Hands-on certification approvals</h1>
+      <p>Students earn a microcredential badge only after passing the online test and completing the required hands-on portion.</p>
+      <div class="hero-actions">
+        <button class="btn" type="button" data-refresh-teacher-dashboard>Refresh Dashboard</button>
+        <a class="btn secondary" href="index.html">Student Certification Hub</a>
+      </div>
+    </div>
+    <aside class="card dark">
+      <span class="tag">Badge Rule</span>
+      <h3>Online + Hands-on</h3>
+      <p>Passing the online test alone shows readiness, but does not unlock the badge until teacher approval.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="container">
+  <article class="card">
+    <div class="section-header compact">
+      <div>
+        <h2>Student approvals</h2>
+        <p class="muted">Mark hands-on completion after you observe the student safely complete the required performance task.</p>
+      </div>
+    </div>
+    <div class="teacher-dashboard-tools">
+      <label>Filter students
+        <input data-teacher-filter type="search" placeholder="Search by name, email, ID, or period">
+      </label>
+      <label>Certification
+        <select data-teacher-cert-filter>
+          <option value="all">All certifications</option>
+          <option value="engineering-safety">Engineering Safety</option>
+          <option value="3d-printing">3D Printing</option>
+          <option value="laser-cutting">Laser Cutting</option>
+          <option value="cnc">CNC Mill</option>
+          <option value="drill-press">Drill Press</option>
+          <option value="soldering">Soldering</option>
+          <option value="hand-cutting-tools">Hand & Cutting Tools</option>
+          <option value="technical-sketching">Technical Sketching</option>
+          <option value="engineering-documentation">Engineering Documentation</option>
+          <option value="fusion-cad-level-1">Fusion CAD Level 1</option>
+          <option value="engineering-drawings">Engineering Drawings</option>
+          <option value="fusion-cad-level-2">Fusion CAD Level 2</option>
+        </select>
+      </label>
+    </div>
+    <div class="teacher-dashboard-status" data-teacher-dashboard-status>Loading students...</div>
+    <div class="teacher-approval-table-wrap" data-teacher-dashboard></div>
+  </article>
+</section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>LockwoodSTEM</p></div></footer>
+</body>
+</html>
