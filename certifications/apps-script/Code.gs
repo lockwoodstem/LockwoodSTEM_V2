@@ -19,6 +19,12 @@ function doGet() {
   });
 }
 
+
+function setup() {
+  setup_();
+  return 'LockwoodSTEM certification account sheets created.';
+}
+
 function doPost(e) {
   try {
     setup_();

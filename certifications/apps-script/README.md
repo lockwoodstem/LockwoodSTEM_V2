@@ -11,7 +11,7 @@ This folder contains the Google Apps Script backend for the Certification login/
 5. Add a property:
    - `AUTH_SECRET`
    - Use a long random value.
-6. Run `setup_` once and approve permissions.
+6. Run `setup` once and approve permissions.
 7. Deploy → New deployment → Web app.
 8. Set:
    - Execute as: Me
