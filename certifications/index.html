@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="cert-auth-checking">
 <head>
 <title>Certifications | LockwoodSTEM</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../assets/css/styles.css">
 <script defer src="../assets/js/main.js"></script>
+<script src="auth-config.js"></script>
+<script defer src="auth.js"></script>
+<script defer src="auth-guard.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -28,7 +31,8 @@
     <div>
       <div class="eyebrow">Certifications</div>
       <h1>Engineering certification hub</h1>
-      <p>Certifications show readiness for course skills and, in some cases, supervised FabLab equipment access. Passing score is 80% for all certifications.</p>
+      <p>Certifications show readiness for course skills and, in some cases, supervised FabLab equipment access. Sign in is required. Passing score is 80% for all certifications.</p>
+      <div class="hero-actions"><a class="btn" href="account.html">My Account</a><button class="btn secondary" type="button" data-cert-logout>Log out</button></div>
     </div>
   </div>
 </section>
