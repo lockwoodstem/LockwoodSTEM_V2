@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" class="cert-auth-checking">
+<head>
+<title>Fusion CAD Level 2 Study Guide | LockwoodSTEM</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<script defer src="../assets/js/main.js"></script>
+<script src="auth-config.js?v=rc20b"></script>
+<script defer src="auth.js?v=rc20b"></script>
+<script defer src="auth-guard.js?v=rc20b"></script>
+<script defer src="badges.js?v=rc20b"></script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="../index.html" aria-label="LockwoodSTEM home">
+      <img class="brand-logo" src="../assets/img/lockwoodstem-concept-a1-black-transparent.png" alt="LockwoodSTEM logo">
+      <span class="brand-text"><span class="brand-title">LockwoodSTEM</span><span class="brand-sub">Student Engineering Hub</span></span>
+    </a>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">Menu</button>
+    <ul class="nav-links">
+      <li><a href="../courses.html">Courses</a></li><li><a href="../agenda.html">Daily Agenda</a></li><li><a href="../resources/index.html">Resources</a></li><li><a href="index.html" aria-current="page">Certifications</a></li><li><a href="../fablab/index.html">FabLab</a></li><li><a href="../about/index.html">About</a></li>
+    </ul>
+  </div>
+</header>
+<main id="main">
+
+<section class="page-hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Fusion CAD Level 2</div>
+      <h1>Study Guide</h1>
+      <p>Prepare to create organized Fusion assemblies and manufacturing-ready advanced CAD models.</p>
+      <div class="hero-actions">
+        <a class="btn" href="fusion-cad-level-2-practice.html">Go to Practice Check</a>
+        <a class="btn secondary" href="fusion-cad-level-2.html">Certification Home</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container cert-study">
+  <div class="grid two">
+    <article class="card">
+      <h2>1. Level 2 CAD mindset</h2>
+      <ul class="unit-meta-list">
+        <li>Level 2 CAD focuses on models that are organized, editable, reviewable, and ready for assemblies or fabrication.</li>
+        <li>Design intent should guide how sketches, features, components, and joints are structured.</li>
+        <li>Use a workflow that another student or teacher can inspect and modify without rebuilding from scratch.</li>
+        <li>Plan relationships between parts before adding unnecessary detail.</li>
+        <li>Save major milestones and use version notes when a design changes significantly.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>2. Bodies vs components</h2>
+      <ul class="unit-meta-list">
+        <li>Bodies are pieces of geometry; components represent parts that can be organized, joined, and assembled.</li>
+        <li>Use components for parts that move, repeat, appear in a BOM, or need their own origin/history.</li>
+        <li>Convert loose bodies to components when the design becomes an assembly.</li>
+        <li>Name components clearly so the browser communicates the design structure.</li>
+        <li>Keep sketches, bodies, and features associated with the correct component whenever possible.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>3. Assemblies and joints</h2>
+      <ul class="unit-meta-list">
+        <li>Joints define how components are positioned or allowed to move relative to each other.</li>
+        <li>Rigid joints lock components together.</li>
+        <li>Revolute joints allow rotation around an axis.</li>
+        <li>Slider joints allow motion along a line.</li>
+        <li>Use joint origins and component geometry carefully so motion behaves as intended.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>4. Construction geometry and reference features</h2>
+      <ul class="unit-meta-list">
+        <li>Construction planes, axes, points, and sketch construction lines help control geometry.</li>
+        <li>Use construction geometry for symmetry, alignment, offsets, hole placement, and angled features.</li>
+        <li>Do not leave confusing unused references that make the model hard to review.</li>
+        <li>Reference features should support design intent, not hide unclear modeling choices.</li>
+        <li>Good construction geometry makes complex models easier to revise.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>5. Patterns, mirrors, and repeated features</h2>
+      <ul class="unit-meta-list">
+        <li>Patterns repeat features, bodies, or components using controlled spacing and count.</li>
+        <li>Mirrors reflect geometry across a plane or line of symmetry.</li>
+        <li>Use pattern and mirror tools instead of manually copying repeated features when possible.</li>
+        <li>Changing a pattern count or spacing should update repeated features predictably.</li>
+        <li>Repeated features should remain connected to the design intent.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>6. Parameters and editable design intent</h2>
+      <ul class="unit-meta-list">
+        <li>User parameters can store important values such as thickness, clearance, hole spacing, or tab width.</li>
+        <li>Named parameters make a model easier to update and understand.</li>
+        <li>Use constraints and parameters together to reduce fragile sketches.</li>
+        <li>Changing one key parameter should update related geometry when the model is built correctly.</li>
+        <li>Document important assumptions, such as material thickness or printer clearance.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>7. Drawings, exports, and manufacturing readiness</h2>
+      <ul class="unit-meta-list">
+        <li>Linked drawings should update when the model changes, but drawings still need to be checked after edits.</li>
+        <li>Drawing views, dimensions, notes, and title blocks should match the current model revision.</li>
+        <li>Export the correct manufacturing file type for the process: STL/3MF, DXF, STEP, or native files as required.</li>
+        <li>Check units, scale, orientation, and part selection before exporting.</li>
+        <li>Keep editable CAD files separate from exported manufacturing files.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>8. Design review readiness</h2>
+      <ul class="unit-meta-list">
+        <li>A design review should show the model, assembly structure, intended motion, key dimensions, and fabrication plan.</li>
+        <li>Reviewers should be able to find named components, important sketches, and exported files quickly.</li>
+        <li>Check for timeline errors, broken references, missing joints, wrong materials, and outdated drawings.</li>
+        <li>Use comments or documentation to explain design decisions and revision history.</li>
+        <li>Do not submit a model that only looks right from one camera angle.</li>
+      </ul>
+    </article>
+  </div>
+
+  <article class="card cert-callout-card">
+    <h2>Hands-on performance checklist</h2>
+    <p>To earn the badge, students must create an organized Fusion model or assembly with components, at least one meaningful joint, advanced parametric tools, manufacturing/export readiness, and reviewable file organization.</p>
+    <div class="hero-actions">
+      <a class="btn dark" href="fusion-cad-level-2-practice.html">Take Practice Check</a>
+      <a class="btn secondary" href="fusion-cad-level-2-final.html">Go to Final Test</a>
+    </div>
+  </article>
+</section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>LockwoodSTEM</p></div></footer>
+</body>
+</html>

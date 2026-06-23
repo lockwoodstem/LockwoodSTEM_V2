@@ -76,3 +76,135 @@ Badge rule:
 - Only then does the `3d-printing` badge appear as earned.
 
 After replacing `Code.gs`, run `setup`, then deploy a new Web App version.
+
+
+## RC10 Laser Cutter Certification
+
+The backend now supports scoring and status tracking for the `laser-cutting` certification.
+
+Badge rule:
+- Online test must be passed.
+- Hands-on completion must be marked by a teacher.
+- Only then does the `laser-cutting` badge appear as earned.
+
+After replacing `Code.gs`, run `setup`, then deploy a new Web App version.
+
+
+## RC11 Drill Press Certification
+
+The backend now supports scoring and status tracking for the `drill-press` certification.
+
+Badge rule:
+- Online test must be passed.
+- Hands-on completion must be marked by a teacher.
+- Only then does the `drill-press` badge appear as earned.
+
+After replacing `Code.gs`, run `setup`, then deploy a new Web App version.
+
+
+## RC12 Hand & Cutting Tools Certification
+
+The backend now supports scoring and status tracking for the `hand-cutting-tools` certification.
+
+Badge rule:
+- Online test must be passed.
+- Hands-on completion must be marked by a teacher.
+- Only then does the `hand-cutting-tools` badge appear as earned.
+
+After replacing `Code.gs`, run `setup`, then deploy a new Web App version.
+
+
+## RC13 Soldering Certification
+
+The backend now supports scoring and status tracking for the `soldering` certification.
+
+Badge rule:
+- Online test must be passed.
+- Hands-on completion must be marked by a teacher.
+- Only then does the `soldering` badge appear as earned.
+
+After replacing `Code.gs`, run `setup`, then deploy a new Web App version.
+
+
+## RC14 CNC Mill Certification
+
+The backend now supports scoring and status tracking for the `cnc` certification.
+
+Badge rule:
+- Online test must be passed.
+- Hands-on completion must be marked by a teacher.
+- Only then does the `cnc` badge appear as earned.
+
+After replacing `Code.gs`, run `setup`, then deploy a new Web App version.
+
+
+## RC15 Technical Sketching Certification
+
+The backend now supports scoring and status tracking for the `technical-sketching` certification.
+
+Badge rule:
+- Online test must be passed.
+- Hands-on completion must be marked by a teacher.
+- Only then does the `technical-sketching` badge appear as earned.
+
+After replacing `Code.gs`, run `setup`, then deploy a new Web App version.
+
+
+## RC16 Engineering Documentation Certification
+
+The backend now supports scoring and status tracking for the `engineering-documentation` certification.
+
+Badge rule:
+- Online test must be passed.
+- Hands-on completion must be marked by a teacher.
+- Only then does the `engineering-documentation` badge appear as earned.
+
+After replacing `Code.gs`, run `setup`, then deploy a new Web App version.
+
+
+## RC17 Fusion CAD Level 1 Certification
+
+The backend now supports scoring and status tracking for the `fusion-cad-level-1` certification.
+
+Badge rule:
+- Online test must be passed.
+- Hands-on completion must be marked by a teacher.
+- Only then does the `fusion-cad-level-1` badge appear as earned.
+
+After replacing `Code.gs`, run `setup`, then deploy a new Web App version.
+
+
+## RC18 Engineering Drawings Certification
+
+The backend now supports scoring and status tracking for the `engineering-drawings` certification.
+
+Badge rule:
+- Online test must be passed.
+- Hands-on completion must be marked by a teacher.
+- Only then does the `engineering-drawings` badge appear as earned.
+
+After replacing `Code.gs`, run `setup`, then deploy a new Web App version.
+
+
+## RC19 Fusion CAD Level 2 Certification
+
+The backend now supports scoring and status tracking for the `fusion-cad-level-2` certification.
+
+Badge rule:
+- Online test must be passed.
+- Hands-on completion must be marked by a teacher.
+- Only then does the `fusion-cad-level-2` badge appear as earned.
+
+After replacing `Code.gs`, run `setup`, then deploy a new Web App version.
+
+
+## RC20 Design Review Certification
+
+The backend now supports scoring and status tracking for the `design-review` certification.
+
+Badge rule:
+- Online test must be passed.
+- Hands-on completion must be marked by a teacher.
+- Only then does the `design-review` badge appear as earned.
+
+After replacing `Code.gs`, run `setup`, then deploy a new Web App version.

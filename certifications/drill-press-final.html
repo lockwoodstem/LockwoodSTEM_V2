@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" class="cert-auth-checking">
+<head>
+<title>Drill Press Final Test | LockwoodSTEM</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<script defer src="../assets/js/main.js"></script>
+<script src="auth-config.js?v=rc20b"></script>
+<script defer src="auth.js?v=rc20b"></script>
+<script defer src="auth-guard.js?v=rc20b"></script>
+<script defer src="badges.js?v=rc20b"></script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="../index.html" aria-label="LockwoodSTEM home">
+      <img class="brand-logo" src="../assets/img/lockwoodstem-concept-a1-black-transparent.png" alt="LockwoodSTEM logo">
+      <span class="brand-text"><span class="brand-title">LockwoodSTEM</span><span class="brand-sub">Student Engineering Hub</span></span>
+    </a>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">Menu</button>
+    <ul class="nav-links">
+      <li><a href="../courses.html">Courses</a></li><li><a href="../agenda.html">Daily Agenda</a></li><li><a href="../resources/index.html">Resources</a></li><li><a href="index.html" aria-current="page">Certifications</a></li><li><a href="../fablab/index.html">FabLab</a></li><li><a href="../about/index.html">About</a></li>
+    </ul>
+  </div>
+</header>
+<main id="main">
+
+<section class="page-hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Drill Press</div>
+      <h1>Final Online Test</h1>
+      <p>Submit your scored Drill Press online test. A score of 80% or higher is required before teacher hands-on approval can unlock the badge.</p>
+      <div class="hero-actions">
+        <a class="btn" href="drill-press-study.html">Review Study Guide</a>
+        <a class="btn secondary" href="drill-press.html">Certification Home</a>
+      </div>
+    </div>
+    <aside class="card dark">
+      <span class="tag">Required Score</span>
+      <h3>80%</h3>
+      <p>Passing the online test does not unlock the badge until the hands-on portion is approved.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="container">
+  <article class="card">
+    <h2>Final test</h2>
+    <p>Answer every question before submitting. Your online-test result will be recorded to your certification account.</p>
+    <form data-drill-final class="cert-quiz-form"></form>
+    <div class="hero-actions">
+      <button class="btn dark" type="button" data-submit-drill-final>Submit Final Test</button>
+      <a class="btn secondary" href="drill-press.html">Cancel</a>
+    </div>
+    <div class="cert-result-box" data-drill-final-result hidden></div>
+  </article>
+</section>
+
+<script defer src="drill-press-cert.js?v=rc20b"></script>
+
+</main>
+<footer class="site-footer"><div class="container"><p>LockwoodSTEM</p></div></footer>
+</body>
+</html>

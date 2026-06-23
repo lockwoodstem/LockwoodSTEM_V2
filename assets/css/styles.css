@@ -1163,3 +1163,84 @@ main .btn.secondary,
   display: grid;
   gap: 0.75rem;
 }
+
+
+/* RC10: Laser Cutter Certification additions */
+.cert-study strong {
+  color: #0b1f3a;
+}
+
+.laser-safety-note {
+  border-left: 5px solid #c8a24a;
+  padding-left: 1rem;
+}
+
+
+/* RC11: Drill Press Certification additions */
+.drill-safety-note {
+  border-left: 5px solid #c8a24a;
+  padding-left: 1rem;
+}
+
+
+/* RC12: Hand & Cutting Tools Certification additions */
+.hand-tool-safety-note {
+  border-left: 5px solid #c8a24a;
+  padding-left: 1rem;
+}
+
+
+/* RC13: Soldering Certification additions */
+.soldering-safety-note {
+  border-left: 5px solid #c8a24a;
+  padding-left: 1rem;
+}
+
+
+/* RC14: CNC Mill Certification additions */
+.cnc-safety-note {
+  border-left: 5px solid #c8a24a;
+  padding-left: 1rem;
+}
+
+
+/* RC15: Technical Sketching Certification additions */
+.sketching-safety-note {
+  border-left: 5px solid #c8a24a;
+  padding-left: 1rem;
+}
+
+
+/* RC16: Engineering Documentation Certification additions */
+.documentation-skill-note {
+  border-left: 5px solid #c8a24a;
+  padding-left: 1rem;
+}
+
+
+/* RC17: Fusion CAD Level 1 Certification additions */
+.fusion-cad-note {
+  border-left: 5px solid #c8a24a;
+  padding-left: 1rem;
+}
+
+
+/* RC18: Engineering Drawings Certification additions */
+.engineering-drawing-note {
+  border-left: 5px solid #c8a24a;
+  padding-left: 1rem;
+}
+
+
+/* RC19: Fusion CAD Level 2 Certification additions */
+.fusion-cad-level-2-note {
+  border-left: 5px solid #c8a24a;
+  padding-left: 1rem;
+}
+
+
+/* RC20: Design Review Certification additions */
+.design-review-note {
+  border-left: 5px solid #c8a24a;
+  padding-left: 1rem;
+}

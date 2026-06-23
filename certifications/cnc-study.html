@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" class="cert-auth-checking">
+<head>
+<title>CNC Mill Study Guide | LockwoodSTEM</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<script defer src="../assets/js/main.js"></script>
+<script src="auth-config.js?v=rc20b"></script>
+<script defer src="auth.js?v=rc20b"></script>
+<script defer src="auth-guard.js?v=rc20b"></script>
+<script defer src="badges.js?v=rc20b"></script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="../index.html" aria-label="LockwoodSTEM home">
+      <img class="brand-logo" src="../assets/img/lockwoodstem-concept-a1-black-transparent.png" alt="LockwoodSTEM logo">
+      <span class="brand-text"><span class="brand-title">LockwoodSTEM</span><span class="brand-sub">Student Engineering Hub</span></span>
+    </a>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">Menu</button>
+    <ul class="nav-links">
+      <li><a href="../courses.html">Courses</a></li><li><a href="../agenda.html">Daily Agenda</a></li><li><a href="../resources/index.html">Resources</a></li><li><a href="index.html" aria-current="page">Certifications</a></li><li><a href="../fablab/index.html">FabLab</a></li><li><a href="../about/index.html">About</a></li>
+    </ul>
+  </div>
+</header>
+<main id="main">
+
+<section class="page-hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">CNC Mill</div>
+      <h1>Study Guide</h1>
+      <p>Prepare to use the DMC2 Mini CNC safely and responsibly from file setup through cleanup.</p>
+      <div class="hero-actions">
+        <a class="btn" href="cnc-practice.html">Go to Practice Check</a>
+        <a class="btn secondary" href="cnc.html">Certification Home</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container cert-study">
+  <div class="grid two">
+    <article class="card">
+      <h2>1. CNC safety mindset</h2>
+      <ul class="unit-meta-list">
+        <li>Use the CNC only after Engineering Safety and CNC certification requirements are complete.</li>
+        <li>CNC machines move automatically; never assume the tool will only move where you expect.</li>
+        <li>Keep hands, hair, clothing, cords, and tools away from moving parts and the spindle.</li>
+        <li>Never bypass guards, covers, teacher checks, or emergency procedures.</li>
+        <li>Stop and ask for help if anything seems wrong before, during, or after a cut.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>2. PPE and machine area</h2>
+      <ul class="unit-meta-list">
+        <li>Safety glasses are required during setup, cutting, chip clearing, and cleanup.</li>
+        <li>Hearing protection may be required depending on material and cut conditions.</li>
+        <li>Secure long hair, hoodie strings, lanyards, and loose clothing.</li>
+        <li>Do not wear gloves around the rotating spindle or cutting tool.</li>
+        <li>Keep the CNC area clear so students can reach the emergency stop and teacher can supervise.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>3. Approved materials and stock</h2>
+      <ul class="unit-meta-list">
+        <li>Use only teacher-approved materials for the machine, bit, and project.</li>
+        <li>Confirm stock dimensions before toolpath setup.</li>
+        <li>Do not cut unknown plastics, metals, composites, or coated materials without explicit approval.</li>
+        <li>Check that the material is flat, stable, and suitable for the workholding method.</li>
+        <li>Material thickness matters; incorrect thickness can cause a crash or incomplete cut.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>4. Tool and bit awareness</h2>
+      <ul class="unit-meta-list">
+        <li>Use the correct bit for the material and operation.</li>
+        <li>Inspect the bit for damage, dullness, incorrect type, or looseness before use.</li>
+        <li>Confirm the bit is properly seated and secured by the teacher-approved method.</li>
+        <li>Do not touch the cutting edge with bare fingers.</li>
+        <li>Report broken, chipped, dull, or missing bits immediately.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>5. CAD/CAM and toolpath review</h2>
+      <ul class="unit-meta-list">
+        <li>Verify units, scale, stock size, origin, and setup orientation.</li>
+        <li>Review toolpath type, cut depth, step-down, feed rate, spindle speed, and tool selection as instructed.</li>
+        <li>Use simulation/preview to check for collisions, wrong depth, clamp hits, or toolpaths outside the stock.</li>
+        <li>Never run code/toolpaths that have not been reviewed and approved.</li>
+        <li>Small setup errors can damage the part, machine, tool, or workholding.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>6. Workholding and zeroing</h2>
+      <ul class="unit-meta-list">
+        <li>Secure stock with approved clamps, tape, fixtures, or vise methods.</li>
+        <li>Confirm clamps and fixtures are outside the toolpath.</li>
+        <li>Set or verify work zero only by the approved class procedure.</li>
+        <li>Be especially careful with Z-zero; incorrect Z-zero can drive the bit into stock or the machine bed.</li>
+        <li>Do not adjust clamps, stock, or zero while the spindle is moving.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>7. Running and monitoring</h2>
+      <ul class="unit-meta-list">
+        <li>Run a supervised dry run, air cut, boundary check, or preview when required.</li>
+        <li>Stay with the machine and monitor sound, chips, dust, tool motion, and stock movement.</li>
+        <li>Stop the job if the stock moves, the bit breaks, the machine makes unusual sounds, or the toolpath looks wrong.</li>
+        <li>Never reach into the machine while it is moving.</li>
+        <li>Know how to pause, stop, and use emergency stop before the cut begins.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>8. Cleanup and reporting</h2>
+      <ul class="unit-meta-list">
+        <li>Wait for the spindle and all motion to stop before removing parts or cleaning.</li>
+        <li>Use approved brushes/vacuums; do not clear chips with fingers near sharp tools.</li>
+        <li>Remove parts, scrap, chips, dust, clamps, and tools safely.</li>
+        <li>Return bits, clamps, and setup tools to the correct location.</li>
+        <li>Report broken tools, poor cuts, unusual noises, loose stock, or machine damage immediately.</li>
+      </ul>
+    </article>
+  </div>
+
+  <article class="card cert-callout-card">
+    <h2>Hands-on performance checklist</h2>
+    <p>To earn the badge, students must demonstrate safe material setup, workholding, zeroing awareness, toolpath review, supervised monitoring, emergency response readiness, and cleanup.</p>
+    <div class="hero-actions">
+      <a class="btn dark" href="cnc-practice.html">Take Practice Check</a>
+      <a class="btn secondary" href="cnc-final.html">Go to Final Test</a>
+    </div>
+  </article>
+</section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>LockwoodSTEM</p></div></footer>
+</body>
+</html>

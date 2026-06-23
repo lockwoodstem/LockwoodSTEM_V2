@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" class="cert-auth-checking">
 <head>
-<title>Laser Cutting | LockwoodSTEM</title>
+<title>Laser Cutter Certification | LockwoodSTEM</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../assets/css/styles.css">
 <script defer src="../assets/js/main.js"></script>
-<script src="auth-config.js?v=rc9b"></script>
-<script defer src="auth.js?v=rc9b"></script>
-<script defer src="auth-guard.js?v=rc9b"></script>
-<script defer src="badges.js?v=rc9b"></script>
+<script src="auth-config.js?v=rc20b"></script>
+<script defer src="auth.js?v=rc20b"></script>
+<script defer src="auth-guard.js?v=rc20b"></script>
+<script defer src="badges.js?v=rc20b"></script>
+
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -30,38 +31,86 @@
 <section class="page-hero">
   <div class="container hero-grid">
     <div>
-      <div class="eyebrow">Certification</div>
-      <h1>Laser Cutting</h1>
-      <p>Tool-access certification for laser safety, material approval, file setup, and supervised operation.</p>
-      <div class="hero-actions"><a class="btn" href="index.html">Back to Certifications</a><a class="btn secondary" href="../resources/index.html">Resources</a></div>
+      <div class="eyebrow">Tool Certification</div>
+      <h1>Laser Cutter Certification</h1>
+      <p>Learn safe laser operation, approved material rules, fire watch expectations, job setup, monitoring, shutdown, and cleanup.</p>
+      <div class="hero-actions">
+        <a class="btn" href="laser-cutting-study.html">Start Study Guide</a>
+        <a class="btn secondary" href="index.html">Back to Certifications</a>
+      </div>
     </div>
     <aside class="card dark">
-      <span class="tag">Passing Score</span>
-      <h3>80%</h3>
-      <p>Unlocks FabLab equipment/tool access</p>
+      <span class="tag">Badge Rule</span>
+      <h3>Online + Hands-on</h3>
+      <p>Pass the online test and complete a supervised laser workflow before the badge unlocks.</p>
     </aside>
   </div>
 </section>
+
 <section class="container">
-  <div class="grid two">
-    <article class="card"><h2>Overview</h2><p>This certification verifies that you understand the essential skills, expectations, and evidence required for this area.</p></article>
-    <article class="card"><h2>Required Skills</h2><ul class="unit-meta-list"><li>Explain the purpose of the skill or tool.</li><li>Follow safety and quality expectations.</li><li>Complete a practice task.</li><li>Submit certification evidence.</li></ul></article>
-    <article class="card"><h2>Study Guide</h2><p>Review vocabulary, examples, procedures, and common mistakes before taking the practice test.</p></article>
-    <article class="card"><h2>Practice Test</h2><p>Use the practice test to check readiness before attempting the final certification test.</p></article>
-    <article class="card"><h2>Final Test</h2><p>Score at least 80% to pass. Retake expectations are set by the instructor.</p></article>
-    <article class="card"><h2>Certificate Info</h2><p>After passing, your certification can be recorded for class progress. Tool-access certifications may be used to determine supervised FabLab tool readiness.</p></article>
+  <div class="grid three">
+    <article class="card cert-step-card">
+      <span class="status-pill">Step 1</span>
+      <h2>Study Guide</h2>
+      <p>Review laser hazards, fire prevention, ventilation, approved materials, file setup, focusing/origin, monitoring, and cleanup.</p>
+      <a class="btn dark small" href="laser-cutting-study.html">Open Study Guide</a>
+    </article>
+    <article class="card cert-step-card">
+      <span class="status-pill">Step 2</span>
+      <h2>Practice Check</h2>
+      <p>Try a low-stakes practice quiz before taking the final online test.</p>
+      <a class="btn dark small" href="laser-cutting-practice.html">Open Practice Check</a>
+    </article>
+    <article class="card cert-step-card">
+      <span class="status-pill ready">Step 3</span>
+      <h2>Final Test</h2>
+      <p>Pass the laser cutter online test, then complete the hands-on portion with teacher approval.</p>
+      <a class="btn dark small" href="laser-cutting-final.html">Take Final Test</a>
+    </article>
   </div>
 </section>
 
-</main>
-<footer class="footer">
-  <div class="container footer-grid">
-    <div>
-      <img class="footer-logo" src="../assets/img/lockwoodstem-concept-a1-black-transparent.png" alt="LockwoodSTEM logo">
-      <div class="footer-note">A student engineering hub for design, fabrication, and aerospace innovation.</div>
+<section class="container">
+  <article class="card">
+    <h2>Hands-on requirement</h2>
+    <p>After passing the online test, complete a supervised laser workflow. Your teacher will approve the hands-on portion from the teacher dashboard.</p>
+    <div class="grid two">
+      <div>
+        <h3>Student must demonstrate</h3>
+        <ul class="unit-meta-list">
+          <li>Identify approved and prohibited laser materials before cutting.</li>
+          <li>Prepare a file with correct vector/raster settings, scale, and line colors.</li>
+          <li>Set up the laser bed, focus/origin, ventilation, and job preview as instructed.</li>
+          <li>Maintain active fire watch for the full job.</li>
+          <li>Stop the job safely if smoke, flame, flare-up, or unexpected behavior occurs.</li>
+          <li>Remove parts safely, clean the bed, and report issues.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Badge unlock rule</h3>
+        <ul class="unit-meta-list">
+          <li>Online test score of 80% or higher</li>
+          <li>Teacher-observed hands-on completion</li>
+          <li>Safe independent readiness for supervised laser use</li>
+          <li>Proper cleanup and documentation habits</li>
+        </ul>
+      </div>
     </div>
-    <div class="footer-links"><a href="../courses.html">Courses</a> <a href="../agenda.html">Daily Agenda</a> <a href="../resources/index.html">Resources</a> <a href="index.html">Certifications</a> <a href="../fablab/index.html">FabLab</a> <a href="../about/index.html">About</a></div>
-  </div>
-</footer>
+  </article>
+</section>
+
+<section class="container">
+  <article class="card">
+    <h2>Certification status</h2>
+    <div data-cert-status data-cert-id="laser-cutting">
+      <p class="muted">Loading your certification status...</p>
+    </div>
+  </article>
+</section>
+
+<script defer src="certification-status.js?v=rc20b"></script>
+
+</main>
+<footer class="site-footer"><div class="container"><p>LockwoodSTEM</p></div></footer>
 </body>
 </html>

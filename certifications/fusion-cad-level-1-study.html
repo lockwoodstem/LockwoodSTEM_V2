@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" class="cert-auth-checking">
+<head>
+<title>Fusion CAD Level 1 Study Guide | LockwoodSTEM</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<script defer src="../assets/js/main.js"></script>
+<script src="auth-config.js?v=rc20b"></script>
+<script defer src="auth.js?v=rc20b"></script>
+<script defer src="auth-guard.js?v=rc20b"></script>
+<script defer src="badges.js?v=rc20b"></script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="../index.html" aria-label="LockwoodSTEM home">
+      <img class="brand-logo" src="../assets/img/lockwoodstem-concept-a1-black-transparent.png" alt="LockwoodSTEM logo">
+      <span class="brand-text"><span class="brand-title">LockwoodSTEM</span><span class="brand-sub">Student Engineering Hub</span></span>
+    </a>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">Menu</button>
+    <ul class="nav-links">
+      <li><a href="../courses.html">Courses</a></li><li><a href="../agenda.html">Daily Agenda</a></li><li><a href="../resources/index.html">Resources</a></li><li><a href="index.html" aria-current="page">Certifications</a></li><li><a href="../fablab/index.html">FabLab</a></li><li><a href="../about/index.html">About</a></li>
+    </ul>
+  </div>
+</header>
+<main id="main">
+
+<section class="page-hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Fusion CAD Level 1</div>
+      <h1>Study Guide</h1>
+      <p>Prepare to build simple, organized, editable Fusion parts using sketches, dimensions, constraints, and basic solid features.</p>
+      <div class="hero-actions">
+        <a class="btn" href="fusion-cad-level-1-practice.html">Go to Practice Check</a>
+        <a class="btn secondary" href="fusion-cad-level-1.html">Certification Home</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container cert-study">
+  <div class="grid two">
+    <article class="card">
+      <h2>1. Fusion workflow mindset</h2>
+      <ul class="unit-meta-list">
+        <li>Fusion models should be organized, editable, and based on design intent.</li>
+        <li>Parametric modeling means dimensions and features can be changed later.</li>
+        <li>A good CAD model is not just the right shape; it is built in a way that can be revised.</li>
+        <li>Use simple, stable steps rather than one messy sketch or feature.</li>
+        <li>Save work early and often in the correct project location.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>2. Projects and file organization</h2>
+      <ul class="unit-meta-list">
+        <li>Create or use the correct project folder before modeling.</li>
+        <li>Name files with project, part, version, or assignment context.</li>
+        <li>Avoid vague names like “part,” “final,” or “new design.”</li>
+        <li>Keep related files together so teammates and the teacher can find them.</li>
+        <li>Use version history and save milestones when making major changes.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>3. Starting sketches</h2>
+      <ul class="unit-meta-list">
+        <li>Choose the correct plane or face for the sketch based on the part orientation.</li>
+        <li>Use the origin and axes intentionally when symmetry or alignment matters.</li>
+        <li>Sketch simple geometry first, then add constraints and dimensions.</li>
+        <li>Closed profiles are needed for many solid features such as extrude.</li>
+        <li>Finish the sketch before creating a 3D feature from it.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>4. Dimensions and constraints</h2>
+      <ul class="unit-meta-list">
+        <li>Dimensions control size and location.</li>
+        <li>Constraints control relationships such as horizontal, vertical, perpendicular, parallel, coincident, tangent, equal, and concentric.</li>
+        <li>Fully defined sketches are more predictable and easier to revise.</li>
+        <li>Do not drag sketch geometry as a replacement for dimensioning it.</li>
+        <li>If geometry turns red or errors appear, stop and fix the constraint or dimension issue.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>5. Solid features</h2>
+      <ul class="unit-meta-list">
+        <li>Extrude turns a closed sketch profile into a 3D solid or cut.</li>
+        <li>Use join, cut, new body, or new component intentionally.</li>
+        <li>Fillets and chamfers modify edges and should be sized based on design intent.</li>
+        <li>Hole features are often better than manually sketching circular cuts for standard holes.</li>
+        <li>Keep feature order logical in the timeline.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>6. Editing and design intent</h2>
+      <ul class="unit-meta-list">
+        <li>Edit sketch dimensions or feature settings instead of deleting and rebuilding when possible.</li>
+        <li>Use the timeline to understand the order of features.</li>
+        <li>Changing an early sketch can affect later features.</li>
+        <li>Build with symmetry, origin alignment, and constraints when they make future edits easier.</li>
+        <li>Rename important sketches, bodies, or components when it improves organization.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>7. Inspection and communication</h2>
+      <ul class="unit-meta-list">
+        <li>Use inspect/measure tools to verify size, distance, diameter, and clearance.</li>
+        <li>Use section analysis or view controls when needed to check interior features.</li>
+        <li>Orbit, pan, zoom, and view cube controls help inspect geometry from different angles.</li>
+        <li>Take screenshots or exports only after confirming the model is saved and correct.</li>
+        <li>CAD models should match the design requirements, not just look close.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>8. Exporting and sharing</h2>
+      <ul class="unit-meta-list">
+        <li>Export the correct file type for the task: STL/3MF for 3D printing, DXF for some 2D cutting workflows, or native/project files for editing.</li>
+        <li>Check units and orientation before exporting.</li>
+        <li>Do not export unfinished or unsaved models as final deliverables.</li>
+        <li>Use clear filenames for exported manufacturing files.</li>
+        <li>Keep editable CAD files separate from exported manufacturing files.</li>
+      </ul>
+    </article>
+  </div>
+
+  <article class="card cert-callout-card">
+    <h2>Hands-on performance checklist</h2>
+    <p>To earn the badge, students must create an organized Fusion part with a controlled sketch, dimensions/constraints, at least one solid feature, a successful edit, and proper save/export behavior.</p>
+    <div class="hero-actions">
+      <a class="btn dark" href="fusion-cad-level-1-practice.html">Take Practice Check</a>
+      <a class="btn secondary" href="fusion-cad-level-1-final.html">Go to Final Test</a>
+    </div>
+  </article>
+</section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>LockwoodSTEM</p></div></footer>
+</body>
+</html>

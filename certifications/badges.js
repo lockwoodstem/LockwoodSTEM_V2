@@ -6,6 +6,7 @@
     { certId: "fusion-cad-level-1", label: "CAD 1", icon: "1", fullName: "Fusion CAD Level 1" },
     { certId: "engineering-drawings", label: "Drawings", icon: "⌖", fullName: "Engineering Drawings" },
     { certId: "fusion-cad-level-2", label: "CAD 2", icon: "2", fullName: "Fusion CAD Level 2" },
+    { certId: "design-review", label: "Review", icon: "R", fullName: "Design Review" },
     { certId: "3d-printing", label: "3D Print", icon: "3D", fullName: "3D Printing" },
     { certId: "laser-cutting", label: "Laser", icon: "L", fullName: "Laser Cutting" },
     { certId: "cnc", label: "CNC", icon: "C", fullName: "CNC Mill" },
