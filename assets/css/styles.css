@@ -1152,3 +1152,14 @@ main .btn.secondary,
   outline: 3px solid rgba(200, 162, 74, 0.42);
   outline-offset: 2px;
 }
+
+
+/* RC9: 3D Printing Certification additions */
+.cert-study strong {
+  color: #0b1f3a;
+}
+
+.printer-family-list {
+  display: grid;
+  gap: 0.75rem;
+}

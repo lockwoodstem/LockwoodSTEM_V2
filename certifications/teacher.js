@@ -1,7 +1,7 @@
 (function () {
   const CERTS = [
     { certId: "engineering-safety", label: "Engineering Safety", hasOnline: true },
-    { certId: "3d-printing", label: "3D Printing", hasOnline: false },
+    { certId: "3d-printing", label: "3D Printing", hasOnline: true },
     { certId: "laser-cutting", label: "Laser Cutting", hasOnline: false },
     { certId: "cnc", label: "CNC Mill", hasOnline: false },
     { certId: "drill-press", label: "Drill Press", hasOnline: false },

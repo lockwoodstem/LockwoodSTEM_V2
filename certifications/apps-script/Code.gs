@@ -246,14 +246,17 @@ function submitCertification_(payload) {
   const answers = payload.answers || {};
 
   if (!token) return json_({ ok: false, error: 'Missing session token.' });
-  if (certId !== 'engineering-safety') {
-    return json_({ ok: false, error: 'Unknown certification.' });
-  }
-
   const auth = validateTokenForServer_(token);
   if (!auth.ok) return json_(auth);
 
-  const score = scoreEngineeringSafety_(answers);
+  let score;
+  if (certId === 'engineering-safety') {
+    score = scoreEngineeringSafety_(answers);
+  } else if (certId === '3d-printing') {
+    score = score3DPrinting_(answers);
+  } else {
+    return json_({ ok: false, error: 'Unknown certification.' });
+  }
   const passed = score.percent >= 80;
   const now = new Date().toISOString();
   const attemptId = Utilities.getUuid();
@@ -522,7 +525,7 @@ function getCertificationList_() {
     { certId: 'fusion-cad-level-1', label: 'Fusion CAD Level 1', hasOnline: false },
     { certId: 'engineering-drawings', label: 'Engineering Drawings', hasOnline: false },
     { certId: 'fusion-cad-level-2', label: 'Fusion CAD Level 2', hasOnline: false },
-    { certId: '3d-printing', label: '3D Printing', hasOnline: false },
+    { certId: '3d-printing', label: '3D Printing', hasOnline: true },
     { certId: 'laser-cutting', label: 'Laser Cutting', hasOnline: false },
     { certId: 'cnc', label: 'CNC Mill', hasOnline: false },
     { certId: 'drill-press', label: 'Drill Press', hasOnline: false },
@@ -536,7 +539,7 @@ function getCertificationIds_() {
 }
 
 function requiresOnlineTest_(certId) {
-  return certId === 'engineering-safety';
+  return certId === 'engineering-safety' || certId === '3d-printing';
 }
 
 function validateTokenForServer_(token) {
@@ -705,4 +708,42 @@ function json_(obj) {
   return ContentService
     .createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+
+function score3DPrinting_(answers) {
+  const key = {
+    q1: 'printer profile, filament/material profile, model scale, and estimated print time',
+    q2: 'PLA unless another material is approved',
+    q3: 'only after instruction, certification requirements, and permission',
+    q4: 'matches slicing assumptions to the printer being used',
+    q5: 'check units and scale before printing',
+    q6: 'improve bed contact, reduce unnecessary supports, and support the part\'s function',
+    q7: 'when the model has unsupported overhangs or features that need them',
+    q8: 'the part\'s function, time, material use, and required strength',
+    q9: 'layer, support, orientation, and first-layer problems before printing',
+    q10: 'clear, installed correctly, and ready for the selected printer',
+    q11: 'poor first-layer adhesion often causes print failure',
+    q12: 'stop or ask for help immediately',
+    q13: 'parts are moving or hot surfaces may be present',
+    q14: 'teacher-approved, clean, dry, untangled, and properly supported',
+    q15: 'reported instead of forced',
+    q16: 'using approved methods after cooling when required',
+    q17: 'cleaned up and disposed of in the correct location',
+    q18: 'identifying the cause and changing the design, orientation, or settings before reprinting',
+    q19: 'complete a safe supervised print workflow from setup through cleanup',
+    q20: 'the online test is passed and the teacher marks the hands-on portion complete'
+  };
+
+  let correct = 0;
+  const total = Object.keys(key).length;
+  Object.keys(key).forEach(function (id) {
+    if (String(answers[id] || '').trim() === key[id]) correct++;
+  });
+
+  return {
+    correct: correct,
+    total: total,
+    percent: Math.round((correct / total) * 100)
+  };
 }

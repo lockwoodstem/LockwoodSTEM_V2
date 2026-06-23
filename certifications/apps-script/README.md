@@ -64,3 +64,15 @@ Teacher setup:
 
 Badge rule:
 - A badge is earned only when the online test is passed and the hands-on portion is marked complete by a teacher.
+
+
+## RC9 3D Printing Certification
+
+The backend now supports scoring and status tracking for the `3d-printing` certification.
+
+Badge rule:
+- Online test must be passed.
+- Hands-on completion must be marked by a teacher.
+- Only then does the `3d-printing` badge appear as earned.
+
+After replacing `Code.gs`, run `setup`, then deploy a new Web App version.
