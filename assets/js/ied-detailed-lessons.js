@@ -111,81 +111,108 @@ function checklistHtml(lesson) {
 
 function resourcesForLesson(lesson) {
   const unit = String(lesson.unit);
-  const base = [
-    {title:"Engineering Resource Library", description:"Open the full library for templates, guides, packets, and reference materials.", href:"../../resources/index.html", available:true}
-  ];
+  const title = (lesson.title || "").toLowerCase();
 
-  if (unit === "0") {
-    return [
-      {title:"Safety Certification Study Guide", description:"Review expectations before safety certification tasks.", href:null, available:false},
-      ...base
-    ];
+  const R = {
+    library: {title:"Engineering Resource Library", description:"Open the full library for templates, guides, packets, and reference materials.", href:"../../resources/index.html", cta:"Open"},
+    graph: {title:"Engineering Graph Paper", description:"Use for layout planning, sketches, measurement notes, and technical work.", href:"../../downloads/templates/LS-TMP-001_Engineering_Graph_Paper.pdf", cta:"Download"},
+    isoPaper: {title:"Isometric Sketch Paper", description:"Use for 3D technical sketching and concept visualization.", href:"../../downloads/templates/LS-TMP-002_Isometric_Sketch_Paper.pdf", cta:"Download"},
+    orthoIsoSheet: {title:"Orthographic & Isometric Sketch Sheet", description:"Use for top, front, right, and isometric view practice.", href:"../../downloads/templates/LS-TMP-003_Orthographic_Isometric_Sketch_Sheet.pdf", cta:"Download"},
+    decisionMatrix: {title:"Decision Matrix Template", description:"Compare design concepts using weighted criteria.", href:"../../downloads/editable-xlsx/LS-TMP-005_Decision_Matrix.xlsx", cta:"Download"},
+    designReview: {title:"Design Review Form", description:"Record feedback, risks, decisions, and next steps during design reviews.", href:"../../downloads/templates/LS-TMP-006_Design_Review_Form.pdf", cta:"Download"},
+    ecr: {title:"Engineering Change Request Form", description:"Document design changes, reasons, impacts, and approvals.", href:"../../downloads/templates/LS-TMP-007_Engineering_Change_Request.pdf", cta:"Download"},
+    measurement: {title:"Measurement Data Sheet", description:"Record repeated measurements, units, trials, observations, and inspection evidence.", href:"../../downloads/templates/LS-TMP-008_Measurement_Data_Sheet.pdf", cta:"Download"},
+    projectPlan: {title:"Project Planning Worksheet", description:"Plan tasks, milestones, materials, risks, responsibilities, and next steps.", href:"../../downloads/templates/LS-TMP-009_Project_Planning_Worksheet.pdf", cta:"Download"},
+    teamContract: {title:"Engineering Team Contract", description:"Define roles, norms, communication expectations, and accountability routines.", href:"../../downloads/templates/LS-TMP-010_Engineering_Team_Contract.pdf", cta:"Download"},
+    bom: {title:"BOM Template", description:"Document parts, quantities, materials, sources, and notes.", href:"../../downloads/editable-xlsx/LS-TMP-011_BOM_Template.xlsx", cta:"Download"},
+    lineGuide: {title:"Line Conventions Guide", description:"Reference for object lines, hidden lines, centerlines, and technical drawing communication.", href:"../../downloads/references/LS-REF-003_Line_Conventions_Guide.pdf", cta:"Download"},
+    dimensionGuide: {title:"Dimensioning Guide", description:"Reference for placing dimensions so parts can be built and inspected.", href:"../../downloads/references/LS-REF-004_Dimensioning_Guide.pdf", cta:"Download"},
+    orthoGuide: {title:"Orthographic Projection Guide", description:"Reference for aligned top, front, and right-side views.", href:"../../downloads/references/LS-REF-005_Orthographic_Projection_Guide.pdf", cta:"Download"},
+    isoGuide: {title:"Isometric Sketching Guide", description:"Reference for isometric axes, construction boxes, and isometric circles.", href:"../../downloads/references/LS-REF-006_Isometric_Sketching_Guide.pdf", cta:"Download"},
+    sectionGuide: {title:"Section & Detail Views Guide", description:"Reference for section views, cutting planes, hatch lines, and detail views.", href:"../../downloads/references/LS-REF-007_Section_and_Detail_Views_Guide.pdf", cta:"Download"},
+    assemblyGuide: {title:"Assembly Documentation Guide", description:"Reference for exploded views, callouts, BOMs, notes, and assembly clarity.", href:"../../downloads/references/LS-REF-008_Assembly_Documentation_Guide.pdf", cta:"Download"},
+    bracketAsset: {title:"Aircraft Mounting Bracket Asset Sheet", description:"Use as a technical reference for aerospace bracket sketches, models, and drawings.", href:"../../downloads/assets/Part001_Aircraft_Mounting_Bracket_Asset_Sheet.jpg", cta:"Open"},
+    assetLibrary: {title:"Engineering Asset Library", description:"Visual reference library for aerospace-inspired design, documentation, and presentation work.", href:"../../downloads/assets/Engineering_Asset_Library_Poster.jpg", cta:"Open"},
+
+    certSafety: {title:"Engineering Safety Certification", description:"Open the certification page when you are ready for safety review and assessment.", href:"../../certifications/engineering-safety.html", cta:"Open"},
+    certSketch: {title:"Technical Sketching Certification", description:"Open the certification page when your sketching evidence is ready.", href:"../../certifications/technical-sketching.html", cta:"Open"},
+    certDocumentation: {title:"Engineering Documentation Certification", description:"Open the certification page when your documentation package is ready.", href:"../../certifications/engineering-documentation.html", cta:"Open"},
+    certFusion1: {title:"Fusion CAD Level 1 Certification", description:"Open the certification page when your part-modeling evidence is ready.", href:"../../certifications/fusion-cad-level-1.html", cta:"Open"},
+    certDrawings: {title:"Engineering Drawings Certification", description:"Open the certification page when your drawing package is ready.", href:"../../certifications/engineering-drawings.html", cta:"Open"},
+    certFusion2: {title:"Fusion CAD Level 2 Certification", description:"Open the certification page when your assembly and mechanism evidence is ready.", href:"../../certifications/fusion-cad-level-2.html", cta:"Open"},
+    cert3d: {title:"3D Printing Certification", description:"Open the certification page before independent 3D printing work.", href:"../../certifications/3d-printing.html", cta:"Open"},
+    certLaser: {title:"Laser Cutting Certification", description:"Open the certification page before independent laser cutting work.", href:"../../certifications/laser-cutting.html", cta:"Open"},
+    certCNC: {title:"CNC Mill Certification", description:"Open the certification page before independent CNC work.", href:"../../certifications/cnc.html", cta:"Open"},
+    certDrill: {title:"Drill Press Certification", description:"Open the certification page before independent drill press work.", href:"../../certifications/drill-press.html", cta:"Open"},
+    certSolder: {title:"Soldering Certification", description:"Open the certification page before independent soldering work.", href:"../../certifications/soldering.html", cta:"Open"},
+    certHand: {title:"Hand & Cutting Tools Certification", description:"Open the certification page before independent hand-tool or cutting-tool work.", href:"../../certifications/hand-cutting-tools.html", cta:"Open"},
+    certDesignReview: {title:"Design Review Certification", description:"Open the certification page when you are ready to demonstrate design review readiness.", href:"../../certifications/design-review.html", cta:"Open"}
+  };
+
+  const unitDefaults = {
+    "0": [R.certSafety, R.measurement, R.teamContract, R.projectPlan],
+    "1": [R.isoPaper, R.orthoIsoSheet, R.lineGuide, R.dimensionGuide, R.orthoGuide, R.isoGuide, R.certSketch],
+    "2": [R.bom, R.assemblyGuide, R.ecr, R.designReview, R.certDocumentation],
+    "3": [R.graph, R.lineGuide, R.dimensionGuide, R.bracketAsset, R.certFusion1],
+    "4": [R.graph, R.dimensionGuide, R.orthoGuide, R.sectionGuide, R.certDrawings],
+    "5": [R.assemblyGuide, R.bom, R.designReview, R.certFusion2],
+    "6": [R.measurement, R.projectPlan, R.cert3d, R.certLaser, R.certCNC, R.certDrill, R.certHand],
+    "7": [R.decisionMatrix, R.designReview, R.projectPlan, R.teamContract, R.measurement, R.bom, R.certDesignReview]
+  };
+
+  let resources = [...(unitDefaults[unit] || []), R.library];
+
+  const add = (...items) => { resources = [...items, ...resources]; };
+
+  if (title.includes("safety") || title.includes("ppe")) add(R.certSafety);
+  if (title.includes("notebook") || title.includes("sketch")) add(R.graph);
+  if (title.includes("measurement") || title.includes("inspection") || title.includes("test") || title.includes("data")) add(R.measurement);
+  if (title.includes("team") || title.includes("collaboration") || title.includes("roles")) add(R.teamContract);
+  if (title.includes("research") || title.includes("requirements") || title.includes("planning") || title.includes("plan")) add(R.projectPlan);
+  if (title.includes("decision matrix") || title.includes("concept")) add(R.decisionMatrix);
+  if (title.includes("review") || title.includes("critique")) add(R.designReview);
+  if (title.includes("change") || title.includes("revision")) add(R.ecr);
+  if (title.includes("bom") || title.includes("bill of materials")) add(R.bom);
+  if (title.includes("assembly") || title.includes("exploded") || title.includes("mechanism")) add(R.assemblyGuide);
+  if (title.includes("line")) add(R.lineGuide);
+  if (title.includes("dimension") || title.includes("tolerance")) add(R.dimensionGuide);
+  if (title.includes("orthographic") || title.includes("view")) add(R.orthoGuide);
+  if (title.includes("isometric")) add(R.isoPaper, R.isoGuide);
+  if (title.includes("section") || title.includes("detail")) add(R.sectionGuide);
+  if (title.includes("3d print") || title.includes("printing")) add(R.cert3d);
+  if (title.includes("laser")) add(R.certLaser);
+  if (title.includes("cnc")) add(R.certCNC);
+  if (title.includes("drill")) add(R.certDrill);
+  if (title.includes("solder")) add(R.certSolder);
+  if (title.includes("hand") || title.includes("cutting")) add(R.certHand);
+  if (title.includes("portfolio")) add(R.assetLibrary);
+  if (title.includes("certification")) {
+    if (unit === "0") add(R.certSafety);
+    if (unit === "1") add(R.certSketch);
+    if (unit === "2") add(R.certDocumentation);
+    if (unit === "3") add(R.certFusion1);
+    if (unit === "4") add(R.certDrawings);
+    if (unit === "5") add(R.certFusion2);
+    if (unit === "7") add(R.certDesignReview);
   }
-  if (unit === "1") {
-    return [
-      {title:"Isometric Sketch Paper", description:"Use for 3D technical sketching practice.", href:"../../downloads/templates/LS-TMP-002_Isometric_Sketch_Paper.pdf", available:true},
-      {title:"Orthographic & Isometric Sketch Sheet", description:"Use for top, front, right, and isometric view practice.", href:"../../downloads/templates/LS-TMP-003_Orthographic_Isometric_Sketch_Sheet.pdf", available:true},
-      {title:"Line Conventions Guide", description:"Reference for object lines, hidden lines, centerlines, and drawing communication.", href:"../../downloads/references/LS-REF-003_Line_Conventions_Guide.pdf", available:true},
-      {title:"Dimensioning Guide", description:"Reference for placing dimensions so parts can be built and inspected.", href:"../../downloads/references/LS-REF-004_Dimensioning_Guide.pdf", available:true},
-      {title:"Orthographic Projection Guide", description:"Reference for aligned top, front, and right-side views.", href:"../../downloads/references/LS-REF-005_Orthographic_Projection_Guide.pdf", available:true},
-      {title:"Isometric Sketching Guide", description:"Reference for isometric axes, construction boxes, and isometric circles.", href:"../../downloads/references/LS-REF-006_Isometric_Sketching_Guide.pdf", available:true},
-      ...base
-    ];
-  }
-  if (unit === "2") {
-    return [
-      {title:"BOM Template", description:"Template for documenting parts, quantities, materials, and notes.", href:"../../downloads/editable-xlsx/LS-TMP-011_BOM_Template.xlsx", available:true},
-      {title:"Assembly Documentation Guide", description:"Reference for exploded views, callouts, BOMs, notes, and assembly clarity.", href:"../../downloads/references/LS-REF-008_Assembly_Documentation_Guide.pdf", available:true},
-      {title:"Engineering Change Request Form", description:"Template for recording design changes and revision reasons.", href:null, available:false},
-      ...base
-    ];
-  }
-  if (unit === "3") {
-    return [
-      {title:"Line Conventions Guide", description:"Reference for clean CAD drawing communication and technical sketch evidence.", href:"../../downloads/references/LS-REF-003_Line_Conventions_Guide.pdf", available:true},
-      {title:"CAD Modeling Checklist", description:"Checklist for sketches, constraints, features, parameters, and exports.", href:null, available:false},
-      {title:"Fusion CAD Level 1 Practice File", description:"Practice resource for part modeling and CAD certification readiness.", href:null, available:false},
-      ...base
-    ];
-  }
-  if (unit === "4") {
-    return [
-      {title:"Engineering Graph Paper", description:"Grid template for planning technical drawing layouts.", href:"../../downloads/templates/LS-TMP-001_Engineering_Graph_Paper_Portrait.pdf", available:true},
-      {title:"Dimensioning Guide", description:"Reference for dimensions, callouts, notes, and technical drawing standards.", href:"../../downloads/references/LS-REF-004_Dimensioning_Guide.pdf", available:true},
-      {title:"Orthographic Projection Guide", description:"Reference for multiview alignment and top, front, and right-side views.", href:"../../downloads/references/LS-REF-005_Orthographic_Projection_Guide.pdf", available:true},
-      {title:"Section & Detail Views Guide", description:"Reference for section views, cutting planes, hatch lines, and detail views.", href:"../../downloads/references/LS-REF-007_Section_and_Detail_Views_Guide.pdf", available:true},
-      ...base
-    ];
-  }
-  if (unit === "5") {
-    return [
-      {title:"Assembly Documentation Guide", description:"Reference for exploded views, callouts, BOMs, notes, and assembly clarity.", href:"../../downloads/references/LS-REF-008_Assembly_Documentation_Guide.pdf", available:true},
-      {title:"Motion Study Checklist", description:"Checklist for joints, range of motion, clearances, and animations.", href:null, available:false},
-      ...base
-    ];
-  }
-  if (unit === "6") {
-    return [
-      {title:"Dimensioning Guide", description:"Reference for inspection dimensions and prototype measurement clarity.", href:"../../downloads/references/LS-REF-004_Dimensioning_Guide.pdf", available:true},
-      {title:"Prototype Planning Worksheet", description:"Plan materials, manufacturing process, testing, and risk before building.", href:null, available:false},
-      ...base
-    ];
-  }
-  return [
-    {title:"Decision Matrix Template", description:"Compare design concepts using weighted criteria.", href:"../../downloads/editable-xlsx/LS-TMP-005_Decision_Matrix.xlsx", available:true},
-    {title:"Design Review Form", description:"Record feedback, risks, decisions, and next steps.", href:"../../downloads/templates/LS-TMP-006_Design_Review_Form.pdf", available:true},
-    {title:"Assembly Documentation Guide", description:"Reference for final assembly documentation and capstone communication.", href:"../../downloads/references/LS-REF-008_Assembly_Documentation_Guide.pdf", available:true},
-    ...base
-  ];
+
+  const seen = new Set();
+  return resources.filter(r => {
+    const key = r.href || r.title;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  }).slice(0, 8);
 }
 
 function resourceCardsHtml(lesson) {
   return resourcesForLesson(lesson).map(resource => {
-    const button = resource.available && resource.href
-      ? `<a class="btn small dark" href="${resource.href}">Download</a>`
-      : `<span class="btn small disabled" aria-disabled="true">In Development</span>`;
+    const label = resource.cta || "Open";
+    const button = resource.href
+      ? `<a class="btn small dark" href="${resource.href}">${label}</a>`
+      : `<span class="btn small disabled" aria-disabled="true">Unavailable</span>`;
     return `
-      <article class="lesson-resource-card ${resource.available ? "" : "resource-disabled"}">
+      <article class="lesson-resource-card ${resource.href ? "" : "resource-disabled"}">
         <h3>${resource.title}</h3>
         <p>${resource.description}</p>
         ${button}
